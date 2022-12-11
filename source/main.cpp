@@ -17,8 +17,6 @@
 #include "states/entity-test-state.hpp"
 #include "states/renderer-test-state.hpp"
 
-// Comment
-
 int main(int argc, char** argv) {
     
     flags::args args(argc, argv); // Parse the command line arguments
