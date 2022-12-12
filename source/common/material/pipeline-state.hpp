@@ -90,6 +90,9 @@ namespace our {
 
 
             //4- color mask 
+            //here we state if (red, green, blue, alpha) of any pixel can be written or not to the frame buffer
+            //in the struct above, they are all set to true, therefore all the individual components of the pixel can be written and changed inside the frame buffer
+            glColorMask(colorMask[0], colorMask[1],colorMask[2],colorMask[3]);
 
     
         }
