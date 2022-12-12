@@ -26,10 +26,10 @@ namespace our {
         // This set of pipeline options specifies whether blending will be used or not and how it will be configured
         struct {
             bool enabled = false;
-            GLenum equation = GL_FUNC_ADD;
-            GLenum sourceFactor = GL_SRC_ALPHA;
-            GLenum destinationFactor = GL_ONE_MINUS_SRC_ALPHA;
-            glm::vec4 constantColor = {0, 0, 0, 0};
+            GLenum equation = GL_FUNC_ADD; //the equation will be adding the two terms together
+            GLenum sourceFactor = GL_SRC_ALPHA; //setting the source factor to the alpha component of the source vector
+            GLenum destinationFactor = GL_ONE_MINUS_SRC_ALPHA; //setting the destination factor to be 1-alpha of the source vector
+            glm::vec4 constantColor = {0, 0, 0, 0}; //we defined a constant color vector of our own 
         } blending;
 
         // These options specify the color and depth mask which can be used to
@@ -73,6 +73,22 @@ namespace our {
 
             }
             //3- blending
+            if (blending.enabled==false) //we don't want to blend
+            {
+                glDisable(GL_BLEND); //disabling the blending option
+
+            }
+            else //we want to use the blending feature
+            {
+                glEnable(GL_BLEND); //enabling the blending option
+                glBlendFunc(blending.sourceFactor, blending.destinationFactor); //we set the factors of both the source and destinations to the factors set in the struct above
+                glBlendEquation(blending.equation); //setting the equation to be addition of the two terms together
+                glBlendColor(blending.constantColor[0],blending.constantColor[1],blending.constantColor[2],blending.constantColor[3]); //this function allows us to defined the constant color vector we want, so here we set it to the one defined in the struct
+
+            }
+
+
+
             //4- color mask 
 
     
