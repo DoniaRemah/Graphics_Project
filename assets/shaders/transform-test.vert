@@ -21,8 +21,9 @@ void main()
     //the homogeneous coordinate of the position vector above is obtained by adding 1 to its w component
     vec4 homogeneous_position = vec4(position, 1.0);
     gl_Position = transform*homogeneous_position;
+    //position=transform*homogeneous_position; ?????
 
-    
+
     // No need to change any of the following lines
     vs_out.position = position;
     vs_out.color = color;
