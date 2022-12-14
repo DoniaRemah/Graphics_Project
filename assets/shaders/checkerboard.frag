@@ -12,5 +12,13 @@ uniform int size = 32;
 uniform vec3 colors[2];
 
 void main(){
-    frag_color = vec4(colors[0], 1.0);
+     float col , row , total;
+    col = floor((gl_FragCoord.x / size)) ; // calc if col is even or odd
+    row = floor((gl_FragCoord.y / size)); //calc if row is even or odd
+    total = col + row; 
+    float isEven = mod(total,2); // even + odd = odd else even
+    if(isEven == 0) // check if total is even or odd
+    {frag_color = vec4(colors[0], 1.0);}
+    else
+    {frag_color = vec4(colors[1], 1.0);}
 }
