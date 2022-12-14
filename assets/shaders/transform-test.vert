@@ -14,9 +14,16 @@ out Varyings {
 
 uniform mat4 transform;
 
-void main(){
+void main()
+{
     //TODO: (Req 3) Change the next line to apply the transformation matrix
-    
+    //added comment: applying the transformation matrix means multiplying the transformation matrix we created in transform.cpp to the position of the point that we want to apply that transformation to
+    //the homogeneous coordinate of the position vector above is obtained by adding 1 to its w component
+    vec4 homogeneous_position = vec4(position, 1.0);
+    gl_Position = transform*homogeneous_position;
+    //position=transform*homogeneous_position; ?????
+
+
     // No need to change any of the following lines
     vs_out.position = position;
     vs_out.color = color;
