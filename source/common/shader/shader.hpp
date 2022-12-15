@@ -95,13 +95,17 @@ namespace our
             // TODO: (Req 1) Send the given 4D vector value to the given uniform
             glUniform4f(getUniformLocation(uniform), value.x, value.y, value.z, value.w);
             // set the value of the given uniform name with the given vector values
-            // use 4f as vec3 contains 4 floats x , y , z , w
+            // use 4f as vec4 contains 4 floats x , y , z , w
             // use function getUniformLocation to get the pointer to this uniform
         }
 
         void set(const std::string &uniform, glm::mat4 matrix)
         {
             // TODO: (Req 1) Send the given matrix 4x4 value to the given uniform
+            glUniformMatrix4fv(getUniformLocation(uniform), 1, GL_FALSE, glm::value_ptr(matrix));
+            // set the value of the given uniform name with the given matrix values
+            // use MATRIX4fV & PASS uniform pointer , count =1 as it is not array , disable transpose , ptr to matrix
+            // use function getUniformLocation to get the pointer to this uniform
         }
 
         // TODO: (Req 1) Delete the copy constructor and assignment operator.
