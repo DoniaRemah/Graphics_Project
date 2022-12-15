@@ -47,7 +47,7 @@ namespace our
         void set(GLenum parameter, GLint value) const
         {
             // TODO: (Req 6) Complete this function
-            glSamplerParameteri(name, parameter, value);
+            glSamplerParameteri(name, parameter, value); // int function
         }
 
         // This function sets a sampler paramter where the value is of type "GLfloat"
