@@ -8,7 +8,7 @@ in Varyings {
 out vec4 frag_color;
 
 uniform vec4 tint;
-uniform sampler2D tex;
+uniform sampler2D tex; //built-in data-type for texture objects
 
 void main(){
     //TODO: (Req 7) Modify the following line to compute the fragment color
