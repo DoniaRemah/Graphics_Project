@@ -19,6 +19,9 @@ namespace our {
         orthoHeight = data.value("orthoHeight", 1.0f);
     }
 
+    
+    //the view matrix transforms all the world coordinates 
+    //into view coordinates that are relative to the camera's position and direction. 
     // Creates and returns the camera view matrix
     glm::mat4 CameraComponent::getViewMatrix() const {
         auto owner = getOwner();
@@ -27,15 +30,28 @@ namespace our {
         //HINT:
         // In the camera space:
         // - eye is the origin (0,0,0)
-        // - center is any point on the line of sight. So center can be any point (0,0,z) where z < 0. For simplicity, we let center be (0,0,-1)
+        // - center is any point on the line of sight. So center can be any point (0,0,z) where z < 0. 
+        //For simplicity, we let center be (0,0,-1)
         // - up is the direction (0,1,0)
         // but to use glm::lookAt, we need eye, center and up in the world state.
-        // Since M (see above) transforms from the camera to thw world space, you can use M to compute:
+        // Since M (see above) transforms from the camera to the world space, you can use M to compute:
         // - the eye position which is the point (0,0,0) but after being transformed by M
         // - the center position which is the point (0,0,-1) but after being transformed by M
         // - the up direction which is the vector (0,1,0) but after being transformed by M
         // then you can use glm::lookAt
-        return glm::mat4(1.0f);
+
+
+        glm::vec4 eye(0,0,0,1); // point (Position of camera)
+        glm::vec4 center(0,0,-1,1); //point (center of line of sight)
+        glm::vec4 up(0,1,0,0); // direction 
+
+        glm::mat4 viewMatrix = glm::lookAt(
+            glm::vec3(M*eye),
+            glm::vec3(M*center),
+            glm::vec3(M*up)
+        );
+
+        return viewMatrix;
     }
 
     // Creates and returns the camera projection matrix
@@ -46,6 +62,20 @@ namespace our {
         // It takes left, right, bottom, top. Bottom is -orthoHeight/2 and Top is orthoHeight/2.
         // Left and Right are the same but after being multiplied by the aspect ratio
         // For the perspective camera, you can use glm::perspective
-        return glm::mat4(1.0f);
+
+        float aspectRatio = viewportSize.x / viewportSize.y; // Defined as width/height.
+        float left = (-orthoHeight/2)*aspectRatio;
+        float right = (orthoHeight/2)*aspectRatio;
+
+        glm::mat4 projection_Matrix(1.0f);
+        if(cameraType == CameraType::ORTHOGRAPHIC){
+              projection_Matrix =  glm::ortho(left,right,-orthoHeight/2,orthoHeight/2);
+        }
+
+        if(cameraType == CameraType::PERSPECTIVE){
+            projection_Matrix =  glm::perspective(fovY,aspectRatio,near,far);
+        }
+
+      return projection_Matrix;
     }
 }
