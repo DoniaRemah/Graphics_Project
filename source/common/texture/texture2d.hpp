@@ -27,6 +27,7 @@ namespace our {
         // This method binds this texture to GL_TEXTURE_2D
         void bind() const {
             //TODO: (Req 5) Complete this function
+
         }
 
         // This static method ensures that no texture is bound to GL_TEXTURE_2D
