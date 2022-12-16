@@ -159,6 +159,9 @@ namespace our
         glm::vec4 eye(0, 0, 0, 1);     // point (Position of camera)
         glm::vec4 center(0, 0, -1, 1); // point (center of line of sight)
 
+        // eye : makan el cam f el world
+        // center : el cam btbos fein
+
         eye = local_world * eye;       // Transforming to world space.
         center = local_world * center; // Transforming to world space.
 
@@ -234,18 +237,29 @@ namespace our
 
             // TODO: (Req 10) Get the camera position
 
-            glm::vec4 cameraPosition = eye; // position of the camera in the world space;
+            glm::vec3 cameraPosition = eye; // position of the camera in the world space;
 
             // TODO: (Req 10) Create a model matrix for the sky such that it always follows the camera (sky sphere center = camera position)
+            our::Transform skyTransform;
+            skyTransform.position = cameraPosition;
+            glm::mat4 skyModel = skyTransform.toMat4();
 
             // TODO: (Req 10) We want the sky to be drawn behind everything (in NDC space, z=1)
             //  We can acheive the is by multiplying by an extra matrix after the projection but what values should we put in it?
             glm::mat4 alwaysBehindTransform = glm::mat4(
                 1.0f, 0.0f, 0.0f, 0.0f,
                 0.0f, 1.0f, 0.0f, 0.0f,
-                0.0f, 0.0f, 1.0f, 0.0f,
-                0.0f, 0.0f, 0.0f, 1.0f);
+                0.0f, 0.0f, 0.0f, 0.0f,
+                0.0f, 0.0f, 1.0f, 1.0f);
+
+            // original matrix before transpose
+            //     1.0f, 0.0f, 0.0f, 0.0f,
+            //     0.0f, 1.0f, 0.0f, 0.0f,
+            //     0.0f, 0.0f, 0.0f, 1.0f,
+            //     0.0f, 0.0f, 0.0f, 1.0f
             // TODO: (Req 10) set the "transform" uniform
+
+            skyMaterial->shader->set("transform", alwaysBehindTransform * VP * skyModel);
 
             // TODO: (Req 10) draw the sky sphere
 
