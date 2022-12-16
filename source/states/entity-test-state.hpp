@@ -56,7 +56,8 @@ class EntityTestState: public our::State {
             our:: Material* material = meshRenderer->material;
             material->setup();
             // Getting entity from local space to camera space
-            material->shader->set("transform", VP * entity->getLocalToWorldMatrix()); 
+            glm::mat4 transf_entity = VP * entity->getLocalToWorldMatrix();
+            material->shader->set("transform",transf_entity); 
             //Drawing
             meshRenderer->mesh->draw();
         }

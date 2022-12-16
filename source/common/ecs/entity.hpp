@@ -49,7 +49,7 @@ namespace our {
             // Return the component you found, or return null of nothing was found.
 
             for(auto my_c: components){ // Iterating thru the list
-                if(my_c->getID() == T::getID()){ // If of the same type return it
+                if(dynamic_cast<T*>(my_c)){ // If of the same type return it
                     return dynamic_cast<T*>(my_c);  // The function calling expects the derived class
                 }
             }
