@@ -34,23 +34,9 @@ namespace our {
         T* addComponent(){
             static_assert(std::is_base_of<Component, T>::value, "T must inherit from Component");
             //TODO: (Req 8) Create an component of type T, set its "owner" to be this entity, then push it into the component's list
-            T* Component = new T;
+            T* Component = new T();
             Component->owner = this;
             components.push_back(Component);
-
-            // bool check_found=false;
-            // // Checking if component doesn't exist
-            // for(auto comp:components){
-            //     if(comp->getID() == T::getID()){
-            //         check_found = true;
-            //         break;
-            //     }
-            // }
-            // // if it doesn't, add it.
-            // if(check_found == false){
-            //     components.push_back(Component);
-            // }
-
             // Don't forget to return a pointer to the new component
             return Component;
         }
@@ -97,14 +83,6 @@ namespace our {
                     break;
                 }
             }
-
-            // for(auto my_c: components){ // Iterating thru the list
-            //     if(my_c->getID() == T::getID()){ // If of the same type 
-            //         components.erase(my_c);
-            //         delete my_c;
-            //         break;
-            //     }
-            // }
 
 
         }

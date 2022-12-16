@@ -70,8 +70,8 @@ namespace our {
                 delete entity; 
             }
             // Emptying Containers
-            markedForRemoval.clear();
             entities.clear();
+            markedForRemoval.clear();
         }
 
         //Since the world owns all of its entities, they should be deleted alongside it.

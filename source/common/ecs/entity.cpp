@@ -13,7 +13,7 @@ namespace our {
     glm::mat4 Entity::getLocalToWorldMatrix() const {
         //TODO: (Req 8) Write this function
 
-       glm::mat4 local_world = localTransform.toMat4(); // Getting entity Transformation Matrix 
+       glm::mat4 local_world = this->localTransform.toMat4(); // Getting entity Transformation Matrix 
        
        Entity* Curr_parent = this->parent; // getting this entity's parent
     
