@@ -33,10 +33,9 @@ namespace our
         }
 
         // This method binds this texture to GL_TEXTURE_2D
-        void bind() const
-        {
-            // TODO: (Req 5) Complete this function
-            glBindTexture(GL_TEXTURE_2D, name); // bind it so any subsequent texture commands will configure the currently bound texture
+        void bind() const {
+            //TODO: (Req 5) Complete this function
+             glBindTexture(GL_TEXTURE_2D, name);
         }
 
         // This static method ensures that no texture is bound to GL_TEXTURE_2D

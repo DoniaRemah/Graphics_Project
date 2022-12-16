@@ -49,7 +49,7 @@ namespace our {
         Sampler* sampler;
         float alphaThreshold;
 
-        void setup() const override;
+        void setup()const override;
         void deserialize(const nlohmann::json& data) override;
     };
 
