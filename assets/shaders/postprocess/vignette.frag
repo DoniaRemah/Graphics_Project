@@ -23,9 +23,9 @@ void main(){
 
     vec4 scene_color = texture(tex,tex_coord);
     vec2 tex_coord_NDS = (tex_coord*2) -1;
+    float 2D_Length = (tex_coord_NDS.x * tex_coord_NDS.x) + (tex_coord_NDS.y * tex_coord_NDS.y);
 
-
-    vec4 vignette = scene_color / (1 + ((tex_coord_NDS.x * tex_coord_NDS.x) + (tex_coord_NDS.y * tex_coord_NDS.y)));
+    vec4 vignette = scene_color / (1 + 2D_Length);
 
     frag_color = vignette;    
 }
