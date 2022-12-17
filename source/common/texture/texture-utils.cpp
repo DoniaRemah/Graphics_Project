@@ -12,7 +12,8 @@ our::Texture2D *our::texture_utils::empty(GLenum format, glm::ivec2 size)
 
     int level =1;
     if(format != GL_DEPTH_COMPONENT24){
-        level = (int)glm::floor(glm::log2((float)glm::max(size.x, size.y))) + 1;
+        
+        level = (int)floor(log2((float)std::max(size.x, size.y))) + 1;
     }
     texture->bind();
     glTexStorage2D(GL_TEXTURE_2D, level, format, size.x, size.y);
