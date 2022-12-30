@@ -98,6 +98,13 @@ namespace our
             CollisionComponent *collision = nullptr;
             Entity *Collision_entity = nullptr;
 
+
+            float min_distance = INT_MAX-1;
+            float act_ballZ ;
+            float act_colidingZ ;
+            float mov ;
+            float distance_in_z ;
+
             for (auto entity : world->getEntities())
             {
                 collision = entity->getComponent<CollisionComponent>();
@@ -120,20 +127,11 @@ namespace our
                     
                     if(name[0] == horiz[0]){
                         
-                        glm::vec3 temp_position;
-                        if (app->getKeyboard().isPressed(GLFW_KEY_S)){
-                             temp_position = position + front * (deltaTime * current_sensitivity.z);
-
                                 //down direction
-                                float act_ballZ = position.z - 0.8;
-                                float act_colidingZ = objPosition.z - objScale.z;
-                                float mov = deltaTime * current_sensitivity.z;
-                                float distance_in_z = act_ballZ - act_colidingZ;
-                                std::cout << "Position of ball is "<< act_ballZ << std::endl;
-                                std::cout << "Objpos.z : " << act_colidingZ << std::endl;
-                                std::cout << "Objscale.z : " << objScale.z << std::endl;
-                                std::cout << "Distance is : " <<  distance_in_z << std::endl;
-                                std::cout << "Mov : " << (deltaTime * current_sensitivity.z)<< std::endl;
+                                act_ballZ = position.z - 0.8;
+                                act_colidingZ = objPosition.z - objScale.z;
+                                mov = deltaTime * current_sensitivity.z;
+                                distance_in_z = act_ballZ - act_colidingZ;
                                 // right direction
                                 float act_ballx_right = position.x - 0.8;
                                 float act_colidingX_right = objPosition.x - objScale.x;
@@ -141,12 +139,21 @@ namespace our
                                 // left direction
                                 float act_colidingX_left = objPosition.x + objScale.x;
                                 float act_ballx_left = position.x + 0.8;
-                                
-                            if( distance_in_z  >= mov   ){
-                                
-                                position += front * (deltaTime * current_sensitivity.z);
-                                std::cout << "///////// In if condition/////////" << std::endl;
-                            }
+                                if (app->getKeyboard().isPressed(GLFW_KEY_S)){
+                                std::cout << "Position of ball is "<< act_ballZ << std::endl;
+                                std::cout << "Objpos.z : " << act_colidingZ << std::endl;
+                                std::cout << "Objscale.z : " << objScale.z << std::endl;
+                                std::cout << "Distance is : " <<  distance_in_z << std::endl;
+                                std::cout << "Mov : " << (deltaTime * current_sensitivity.z)<< std::endl;
+                                if(act_ballZ >= act_colidingZ){
+                                        if(min_distance>distance_in_z ){
+                                        min_distance = distance_in_z;
+                                        std::cout << "Value of new min distance " << min_distance << std::endl;
+                                    }
+                                }
+
+                                }
+                            
                         }
                         
                         
@@ -169,7 +176,7 @@ namespace our
 
 
 
-                    }
+                    
 
                 }
 
@@ -194,6 +201,15 @@ namespace our
                     break;
                 }
             }
+
+            if (app->getKeyboard().isPressed(GLFW_KEY_S)){
+                if( min_distance  >= mov   ){
+                position += front * (deltaTime * current_sensitivity.z);
+                std::cout << "///////// The ball will move /////////" << std::endl;
+            }
+            }
+
+
 
 
             // If the left mouse button is pressed, we get the change in the mouse location
