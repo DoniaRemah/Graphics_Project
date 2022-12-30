@@ -11,6 +11,7 @@ namespace our
             return;
 
         std::string obstucaseTypeStr = data.value("obstucaseType", "score");
+        
         if (obstucaseTypeStr == "score")
         {
             obstucaseType = CollisionType::SCORE;

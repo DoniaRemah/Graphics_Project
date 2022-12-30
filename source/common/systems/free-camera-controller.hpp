@@ -97,6 +97,10 @@ namespace our
             CollisionComponent *collision = nullptr;
             Entity *Collision_entity = nullptr;
 
+
+            std:: string act_Collision_Type;
+            Entity *actual_collision_entity = nullptr;
+
             float min_distance = INT_MAX - 1;
             float act_ball;
             float act_coliding;
@@ -118,133 +122,113 @@ namespace our
                 // check z or y ??? Z 90 %%%
                 bool collisionY = false;
 
-                if (collision->getobstucaseType() == CollisionType::WALL)
+                std::string horiz = "h";
+                std::string vertical = "v";
+
+                // down direction
+                mov = deltaTime * current_sensitivity.z;
+
+                // for checks
+                float act_ballx_right = position.x - 0.5;
+                float act_colidingX_right = objPosition.x - objScale.x;
+                float distance_in_right = act_ballx_right - act_colidingX_right;
+                float act_ballx_left = position.x + 0.5;
+                float act_colidingX_left = objPosition.x + objScale.x;
+
+                float act_ball_top = position.z + 0.5;
+                float act_ball_below = position.z - 0.5;
+
+                float act_wall_top = objPosition.z + objScale.z;
+                float act_wall_below = objPosition.z - objScale.z;
+
+                // COLLIDE FROM RIGHT
+
+                if (app->getKeyboard().isPressed(GLFW_KEY_D))
                 {
-                    std::string horiz = "h";
-                    std::string vertical = "v";
+                    act_coliding = objPosition.x + objScale.x;
+                    act_ball = position.x - 0.5;
 
-                    // down direction
-                    mov = deltaTime * current_sensitivity.z;
+                    distance = act_ball - act_coliding;
 
-                    // for checks
-                    float act_ballx_right = position.x - 0.5;
-                    float act_colidingX_right = objPosition.x - objScale.x;
-                    float distance_in_right = act_ballx_right - act_colidingX_right;
-                    float act_ballx_left = position.x + 0.5;
-                    float act_colidingX_left = objPosition.x + objScale.x;
-
-                    float act_ball_top = position.z + 0.5;
-                    float act_ball_below = position.z - 0.5;
-
-                    float act_wall_top = objPosition.z + objScale.z;
-                    float act_wall_below = objPosition.z - objScale.z;
-
-                    // COLLIDE FROM RIGHT
-
-                    if (app->getKeyboard().isPressed(GLFW_KEY_D))
+                    if (act_ball >= act_coliding) // ball is left of wall
                     {
-                        act_coliding = objPosition.x + objScale.x;
-                        act_ball = position.x - 0.5;
-
-                        distance = act_ball - act_coliding;
-
-                        if (act_ball >= act_coliding) // ball is left of wall
+                        if (act_ball_top > act_wall_below && act_ball_below < act_wall_top)
                         {
-                            if (act_ball_top > act_wall_below && act_ball_below < act_wall_top)
+                            if (min_distance > distance)
                             {
-                                if (min_distance > distance)
-                                {
-                                    min_distance = distance;
+                                if(collision->getobstucaseType() == CollisionType::SCORE){
+                                    act_Collision_Type = "score";
+                                    actual_collision_entity = Collision_entity;
                                 }
+                                
+                                min_distance = distance;
                             }
                         }
                     }
+                }
 
-                    // COLLIDE FROM LEFT
+                // COLLIDE FROM LEFT
 
-                    if (app->getKeyboard().isPressed(GLFW_KEY_A))
+                if (app->getKeyboard().isPressed(GLFW_KEY_A))
+                {
+                    act_coliding = objPosition.x - objScale.x;
+                    act_ball = position.x + 0.5;
+
+                    distance = act_coliding - act_ball;
+
+                    if (act_ball <= act_coliding) // ball is right of wall
                     {
-                        act_coliding = objPosition.x - objScale.x;
-                        act_ball = position.x + 0.5;
-
-                        distance = act_coliding - act_ball;
-
-                        if (act_ball <= act_coliding) // ball is right of wall
+                        if (act_ball_top > act_wall_below && act_ball_below < act_wall_top)
                         {
-                            if (act_ball_top > act_wall_below && act_ball_below < act_wall_top)
+                            if (min_distance > distance)
                             {
-                                if (min_distance > distance)
-                                {
-                                    min_distance = distance;
-                                }
+                                min_distance = distance;
                             }
                         }
                     }
+                }
 
-                    // COLLIDE FROM ABOVE BALL
+                // COLLIDE FROM ABOVE BALL
 
-                    if (app->getKeyboard().isPressed(GLFW_KEY_W))
+                if (app->getKeyboard().isPressed(GLFW_KEY_W))
+                {
+                    act_ball = position.z + 0.5;
+                    act_coliding = objPosition.z - objScale.z;
+                    distance = act_coliding - act_ball;
+
+                    if (act_ball <= act_coliding) // ball is below of wall
                     {
-                        act_ball = position.z + 0.5;
-                        act_coliding = objPosition.z - objScale.z;
-                        distance = act_coliding - act_ball;
-
-                        if (act_ball <= act_coliding) // ball is below of wall
+                        if (act_ballx_left > act_colidingX_right && act_ballx_right < act_colidingX_left)
                         {
-                            if (act_ballx_left > act_colidingX_right && act_ballx_right < act_colidingX_left)
+                            if (min_distance > distance)
                             {
-                                if (min_distance > distance)
-                                {
-                                    min_distance = distance;
-                                }
+                                min_distance = distance;
                             }
                         }
                     }
+                }
 
-                    // COLLIDE FROM BELOW OF BALL
-                    if (app->getKeyboard().isPressed(GLFW_KEY_S))
+                // COLLIDE FROM BELOW OF BALL
+                if (app->getKeyboard().isPressed(GLFW_KEY_S))
+                {
+                    act_ball = position.z - 0.5;
+                    act_coliding = objPosition.z + objScale.z;
+                    distance = act_ball - act_coliding;
+
+                    if (act_ball >= act_coliding) // ball is above of wall
                     {
-                        act_ball = position.z - 0.5;
-                        act_coliding = objPosition.z + objScale.z;
-                        distance = act_ball - act_coliding;
-
-                        if (act_ball >= act_coliding) // ball is above of wall
+                        if (act_ballx_left > act_colidingX_right && act_ballx_right < act_colidingX_left)
                         {
-                            if (act_ballx_left > act_colidingX_right && act_ballx_right < act_colidingX_left)
+                            if (min_distance > distance)
                             {
-                                if (min_distance > distance)
-                                {
-                                    min_distance = distance;
-                                }
+                                min_distance = distance;
                             }
                         }
-                    }
-
-                    // collisionY = position.z + 1.0 >= objPosition.z &&
-                    //              objPosition.z + 1.0 >= position.z;
-
-                    //    collisionY = position of collision(center) + half height && position of palyer(center) + radius
-                    // collision only if on both axes
-                    if (collisionX && collisionY)
-                    {
-
-                        if (collision->getobstucaseType() == CollisionType::SCORE)
-                        {
-                            app->score += 10;
-                            world->markForRemoval(Collision_entity);
-                        }
-
-                        else if (collision->getobstucaseType() == CollisionType::WIN)
-                            app->winner = true;
-
-                        break;
                     }
                 }
             }
 
-            // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
-            // if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
-            //     current_sensitivity *= controller->speedupFactor;
+            ///////////////////////////////////////////////////////////// CHECKING TYPE OF COLLISION
 
             if (app->getKeyboard().isPressed(GLFW_KEY_S))
             {
@@ -272,10 +256,26 @@ namespace our
 
             if (app->getKeyboard().isPressed(GLFW_KEY_D))
             {
-                if (min_distance >= mov)
+                if (min_distance >= mov) // if it didn't collide
                 {
+
                     position -= right * (deltaTime * current_sensitivity.x);
                 }
+                else // if it collided
+                {
+                    if (act_Collision_Type == "score")
+                    {
+                        app->score += 10;
+                        std:: cout << "score is: " << app->score << std:: endl;
+                        world->markForRemoval(actual_collision_entity);
+                        position -= right * (deltaTime * current_sensitivity.x);
+                    }
+                }
+            }
+
+            if (collision->getobstucaseType() == CollisionType::WIN)
+            {
+                app->winner = true;
             }
 
             // If the left mouse button is pressed, we get the change in the mouse location
@@ -300,7 +300,6 @@ namespace our
             float fov = camera->fovY + app->getMouse().getScrollOffset().y * controller->fovSensitivity;
             fov = glm::clamp(fov, glm::pi<float>() * 0.01f, glm::pi<float>() * 0.99f); // We keep the fov in the range 0.01*PI to 0.99*PI
             camera->fovY = fov;
-
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked
@@ -314,3 +313,7 @@ namespace our
         }
     };
 }
+
+// If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
+// if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
+//     current_sensitivity *= controller->speedupFactor;

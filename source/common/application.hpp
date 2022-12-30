@@ -74,8 +74,8 @@ namespace our
         virtual void setupCallbacks();                        // Sets-up the window callback functions from GLFW to our (Mouse/Keyboard) classes.
 
     public:
-        int score;
-        bool winner;
+        int score=0;
+        bool winner=false;
 
         // Create an application with following configuration
         Application(const nlohmann::json &app_config) : app_config(app_config) {}

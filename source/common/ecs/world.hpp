@@ -45,6 +45,7 @@ namespace our {
             //TODO: (Req 8) If the entity is in this world, add it to the "markedForRemoval" set.
             if(entities.find(entity) != entities.end()){
                 markedForRemoval.insert(entity);
+                deleteMarkedEntities();
             }
         }
 
@@ -52,8 +53,6 @@ namespace our {
         // Then each of these elements are deleted.
         void deleteMarkedEntities(){
             //TODO: (Req 8) Remove and delete all the entities that have been marked for removal
-
-              
             for(auto entity: markedForRemoval){
                 entities.erase(entity); // Removing elements from entities list      
                 delete entity; 
