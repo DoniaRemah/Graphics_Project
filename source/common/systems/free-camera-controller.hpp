@@ -128,17 +128,17 @@ namespace our
                     if(name[0] == horiz[0]){
                         
                                 //down direction
-                                act_ballZ = position.z - 0.8;
-                                act_colidingZ = objPosition.z - objScale.z;
+                                act_ballZ = position.z - 0.5;
+                                act_colidingZ = objPosition.z + objScale.z;
                                 mov = deltaTime * current_sensitivity.z;
                                 distance_in_z = act_ballZ - act_colidingZ;
                                 // right direction
-                                float act_ballx_right = position.x - 0.8;
+                                float act_ballx_right = position.x - 0.5;
                                 float act_colidingX_right = objPosition.x - objScale.x;
                                 float distance_in_right = act_ballx_right - act_colidingX_right;
                                 // left direction
                                 float act_colidingX_left = objPosition.x + objScale.x;
-                                float act_ballx_left = position.x + 0.8;
+                                float act_ballx_left = position.x + 0.5;
                                 if (app->getKeyboard().isPressed(GLFW_KEY_S)){
                                 std::cout << "Position of ball is "<< act_ballZ << std::endl;
                                 std::cout << "Objpos.z : " << act_colidingZ << std::endl;
@@ -146,13 +146,21 @@ namespace our
                                 std::cout << "Distance is : " <<  distance_in_z << std::endl;
                                 std::cout << "Mov : " << (deltaTime * current_sensitivity.z)<< std::endl;
                                 if(act_ballZ >= act_colidingZ){
-                                        if(min_distance>distance_in_z ){
-                                        min_distance = distance_in_z;
-                                        std::cout << "Value of new min distance " << min_distance << std::endl;
+                                    std::cout << "----------------------- "<< std::endl;
+                                    std::cout << "Right of ball is:  "<< act_ballx_right << std::endl;
+                                    std::cout << "left wall is:  "<< act_colidingX_left << std::endl;
+                                    std::cout << "Right of wall is:  "<< act_colidingX_right << std::endl;
+                                    std::cout << "left of ball is: " <<  act_ballx_left<< std::endl;
+                                        if(act_ballx_left > act_colidingX_right && act_ballx_right< act_colidingX_left ){
+                                            if(min_distance>distance_in_z ){
+                                            min_distance = distance_in_z;
+                                            std::cout << "Value of new min distance " << min_distance << std::endl;
+                                        }
+
                                     }
                                 }
 
-                                }
+                            }
                             
                         }
                         
