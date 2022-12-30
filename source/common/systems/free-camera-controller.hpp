@@ -148,19 +148,8 @@ namespace our
 
                         distance = act_ball - act_coliding;
 
-                        // std::cout << "Position of ball is " << act_ball << std::endl;
-                        // std::cout << "Objpos.x : " << act_coliding << std::endl;
-                        // std::cout << "Distance is : " << distance << std::endl;
-                        // std::cout << "Mov : " << (deltaTime * current_sensitivity.z) << std::endl;
-
                         if (act_ball >= act_coliding) // ball is left of wall
                         {
-                            // std::cout << "Top of ball: " << act_ball_top << std::endl;
-                            // std::cout << "Below of wall: " << act_wall_below << std::endl;
-
-                            // std::cout << "Below of ball: " << act_ball_below << std::endl;
-                            // std::cout << "Top of wall: " << act_wall_top << std::endl;
-
                             if (act_ball_top > act_wall_below && act_ball_below < act_wall_top)
                             {
                                 if (min_distance > distance)
