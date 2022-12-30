@@ -41,7 +41,7 @@ namespace our
             CameraComponent *camera = nullptr;
             FreeCameraControllerComponent *controller = nullptr;
             PlayerComponent *player = nullptr;
-            bool upCollider =false;
+            bool upCollider = false;
             bool downCollider = false;
             bool leftCollider = false;
             bool rightCollider = false;
@@ -84,26 +84,24 @@ namespace our
             }
 
             // We get a reference to the entity's position and rotation
-            glm::vec3 & position = entity->localTransform.position;
-            glm::vec3 & rotation = entity->localTransform.rotation;
+            glm::vec3 &position = entity->localTransform.position;
+            glm::vec3 &rotation = entity->localTransform.rotation;
 
             glm::mat4 matrix = entity->localTransform.toMat4();
             glm::vec3 front = glm::vec3(matrix * glm::vec4(0, 0, -1, 0)),
-            up = glm::vec3(matrix * glm::vec4(0, 1, 0, 0)),
-            right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
+                      up = glm::vec3(matrix * glm::vec4(0, 1, 0, 0)),
+                      right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
             glm::vec3 current_sensitivity = controller->positionSensitivity;
-                
 
             // Get Collision Entity
             CollisionComponent *collision = nullptr;
             Entity *Collision_entity = nullptr;
 
-
-            float min_distance = INT_MAX-1;
-            float act_ballZ ;
-            float act_colidingZ ;
-            float mov ;
-            float distance_in_z ;
+            float min_distance = INT_MAX - 1;
+            float act_ball;
+            float act_coliding;
+            float mov;
+            float distance;
 
             for (auto entity : world->getEntities())
             {
@@ -111,12 +109,12 @@ namespace our
                 if (!(collision))
                     continue;
                 Collision_entity = collision->getOwner();
-                std::string  name = Collision_entity->name;
-                glm::vec3 & objPosition = Collision_entity->localTransform.position;
-                glm::vec3 & objScale = Collision_entity->localTransform.scale;
+                std::string name = Collision_entity->name;
+                glm::vec3 &objPosition = Collision_entity->localTransform.position;
+                glm::vec3 &objScale = Collision_entity->localTransform.scale;
                 bool collisionX = false;
                 // collisionX = position of collision(center) + half width && position of palyer(center) + radius
-                
+
                 // check z or y ??? Z 90 %%%
                 bool collisionY = false;
 
@@ -124,101 +122,152 @@ namespace our
                 {
                     std::string horiz = "h";
                     std::string vertical = "v";
-                    
-                    if(name[0] == horiz[0]){
-                        
-                                //down direction
-                                act_ballZ = position.z - 0.5;
-                                act_colidingZ = objPosition.z + objScale.z;
-                                mov = deltaTime * current_sensitivity.z;
-                                distance_in_z = act_ballZ - act_colidingZ;
-                                // right direction
-                                float act_ballx_right = position.x - 0.5;
-                                float act_colidingX_right = objPosition.x - objScale.x;
-                                float distance_in_right = act_ballx_right - act_colidingX_right;
-                                // left direction
-                                float act_colidingX_left = objPosition.x + objScale.x;
-                                float act_ballx_left = position.x + 0.5;
-                                if (app->getKeyboard().isPressed(GLFW_KEY_S)){
-                                std::cout << "Position of ball is "<< act_ballZ << std::endl;
-                                std::cout << "Objpos.z : " << act_colidingZ << std::endl;
-                                std::cout << "Objscale.z : " << objScale.z << std::endl;
-                                std::cout << "Distance is : " <<  distance_in_z << std::endl;
-                                std::cout << "Mov : " << (deltaTime * current_sensitivity.z)<< std::endl;
-                                if(act_ballZ >= act_colidingZ){
-                                    std::cout << "----------------------- "<< std::endl;
-                                    std::cout << "Right of ball is:  "<< act_ballx_right << std::endl;
-                                    std::cout << "left wall is:  "<< act_colidingX_left << std::endl;
-                                    std::cout << "Right of wall is:  "<< act_colidingX_right << std::endl;
-                                    std::cout << "left of ball is: " <<  act_ballx_left<< std::endl;
-                                        if(act_ballx_left > act_colidingX_right && act_ballx_right< act_colidingX_left ){
-                                            if(min_distance>distance_in_z ){
-                                            min_distance = distance_in_z;
-                                            std::cout << "Value of new min distance " << min_distance << std::endl;
-                                        }
 
-                                    }
-                                }
+                    // down direction
+                    mov = deltaTime * current_sensitivity.z;
 
-                            }
-                            
-                        }
-                        
-                        
-                        // ball colide from left of wall
-                        // if(objPosition.x + (0.5*objScale.z) <= position.x-0.8){
-                        //     collider = true;
-                        // }
-                        // // ball colide from right of wall
-                        // else if (objPosition.x - (0.5*objScale.z) >= position.x+0.8){
-                        //     collider = true;
-                        // }
-                        // ball colide from above wall
-                        // if ( (objPosition.z + (objScale.z) >= position.z-0.8) && (objPosition.z - (objScale.z) <= position.z+0.8) && (objPosition.x - (objScale.x) <= position.x+0.8) && (objPosition.x + (objScale.x) >= position.x-0.8)){
-                        //     downCollider = true;
-                        // }
-                        // // ball colide from below wall
-                        // if ((objPosition.z - (objScale.z) <= position.z+0.8) && (objPosition.z + (objScale.z) >= position.z-0.8) && (objPosition.x - (objScale.x) <= position.x+0.8) && (objPosition.x + (objScale.x) >= position.x-0.8) ){
-                        //     upCollider = true;
-                        // }
+                    // for checks
+                    float act_ballx_right = position.x - 0.5;
+                    float act_colidingX_right = objPosition.x - objScale.x;
+                    float distance_in_right = act_ballx_right - act_colidingX_right;
+                    float act_ballx_left = position.x + 0.5;
+                    float act_colidingX_left = objPosition.x + objScale.x;
 
+                    float act_ball_top = position.z + 0.5;
+                    float act_ball_below = position.z - 0.5;
 
+                    float act_wall_top = objPosition.z + objScale.z;
+                    float act_wall_below = objPosition.z - objScale.z;
 
-                    
+                    // COLLIDE FROM LEFT
 
-                }
-
-
-                // collisionY = position.z + 1.0 >= objPosition.z &&
-                //                   objPosition.z + 1.0 >= position.z;
-
-                //    collisionY = position of collision(center) + half height && position of palyer(center) + radius
-                // collision only if on both axes
-                if (collisionX && collisionY)
-                {
-
-                    if (collision->getobstucaseType() == CollisionType::SCORE)
+                    if (app->getKeyboard().isPressed(GLFW_KEY_A))
                     {
-                        app->score += 10;
-                        world->markForRemoval(Collision_entity);
+                        act_coliding = objPosition.x - objScale.x;
+                        act_ball = position.x + 0.5;
+
+                        distance = act_coliding - act_ball;
+
+                        std::cout << "Position of ball is " << act_ball << std::endl;
+                        std::cout << "Objpos.x : " << act_coliding << std::endl;
+                        std::cout << "Distance is : " << distance << std::endl;
+                        std::cout << "Mov : " << (deltaTime * current_sensitivity.z) << std::endl;
+
+                        if (act_ball <= act_coliding) // ball is right of wall
+                        {
+                            std::cout << "Top of ball: " << act_ball_top << std::endl;
+                            std::cout << "Below of wall: " << act_wall_below << std::endl;
+
+                            std::cout << "Below of ball: " << act_ball_below << std::endl;
+                            std::cout << "Top of wall: " << act_wall_top << std::endl;
+
+                            if (act_ball_top > act_wall_below && act_ball_below < act_wall_top)
+                            {
+                                if (min_distance > distance)
+                                {
+                                    min_distance = distance;
+                                    // std::cout << "Value of new min distance " << min_distance << std::endl;
+                                }
+                            }
+                        }
                     }
 
-                    else if (collision->getobstucaseType() == CollisionType::WIN)
-                        app->winner = true;
+                    // COLLIDE FROM ABOVE BALL
 
-                    break;
+                    if (app->getKeyboard().isPressed(GLFW_KEY_W))
+                    {
+                        act_ball = position.z + 0.5;
+                        act_coliding = objPosition.z - objScale.z;
+                        distance = act_coliding - act_ball;
+
+                        if (act_ball <= act_coliding) // ball is below of wall
+                        {
+                            if (act_ballx_left > act_colidingX_right && act_ballx_right < act_colidingX_left)
+                            {
+                                if (min_distance > distance)
+                                {
+                                    min_distance = distance;
+                                    // std::cout << "Value of new min distance " << min_distance << std::endl;
+                                }
+                            }
+                        }
+                    }
+
+                    // COLLIDE FROM BELOW OF BALL
+                    if (app->getKeyboard().isPressed(GLFW_KEY_S))
+                    {
+                        act_ball = position.z - 0.5;
+                        act_coliding = objPosition.z + objScale.z;
+                        distance = act_ball - act_coliding;
+                        // std::cout << "Position of ball is "<< act_ball << std::endl;
+                        // std::cout << "Objpos.z : " << act_coliding << std::endl;
+                        // std::cout << "Objscale.z : " << objScale.z << std::endl;
+                        // std::cout << "Distance is : " <<  distance << std::endl;
+                        // std::cout << "Mov : " << (deltaTime * current_sensitivity.z)<< std::endl;
+
+                        if (act_ball >= act_coliding) // ball is above of wall
+                        {
+                            // std::cout << "----------------------- "<< std::endl;
+                            // std::cout << "Right of ball is:  "<< act_ballx_right << std::endl;
+                            // std::cout << "left wall is:  "<< act_colidingX_left << std::endl;
+                            // std::cout << "Right of wall is:  "<< act_colidingX_right << std::endl;
+                            // std::cout << "left of ball is: " <<  act_ballx_left<< std::endl;
+                            if (act_ballx_left > act_colidingX_right && act_ballx_right < act_colidingX_left)
+                            {
+                                if (min_distance > distance)
+                                {
+                                    min_distance = distance;
+                                    // std::cout << "Value of new min distance " << min_distance << std::endl;
+                                }
+                            }
+                        }
+                    }
+
+                    // collisionY = position.z + 1.0 >= objPosition.z &&
+                    //              objPosition.z + 1.0 >= position.z;
+
+                    //    collisionY = position of collision(center) + half height && position of palyer(center) + radius
+                    // collision only if on both axes
+                    if (collisionX && collisionY)
+                    {
+
+                        if (collision->getobstucaseType() == CollisionType::SCORE)
+                        {
+                            app->score += 10;
+                            world->markForRemoval(Collision_entity);
+                        }
+
+                        else if (collision->getobstucaseType() == CollisionType::WIN)
+                            app->winner = true;
+
+                        break;
+                    }
+                }
+            }
+            if (app->getKeyboard().isPressed(GLFW_KEY_S))
+            {
+                if (min_distance >= mov)
+                {
+                    position += front * (deltaTime * current_sensitivity.z);
+                    // std::cout << "///////// The ball will move /////////" << std::endl;
                 }
             }
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_S)){
-                if( min_distance  >= mov   ){
-                position += front * (deltaTime * current_sensitivity.z);
-                std::cout << "///////// The ball will move /////////" << std::endl;
+            if (app->getKeyboard().isPressed(GLFW_KEY_W))
+            {
+                if (min_distance >= mov)
+                {
+                    position -= front * (deltaTime * current_sensitivity.z);
+                }
             }
+
+            if (app->getKeyboard().isPressed(GLFW_KEY_A))
+            {
+                if (min_distance >= mov)
+                {
+                    position += right * (deltaTime * current_sensitivity.x);
+                }
             }
-
-
-
 
             // If the left mouse button is pressed, we get the change in the mouse location
             // and use it to update the camera rotation
@@ -244,22 +293,16 @@ namespace our
             camera->fovY = fov;
 
             // We get the camera model matrix (relative to its parent) to compute the front, up and right directions
-            
 
-
-
-            
             // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
             if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
                 current_sensitivity *= controller->speedupFactor;
-            
+
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
 
-                            if (app->getKeyboard().isPressed(GLFW_KEY_D))
-                    position -= right * (deltaTime * current_sensitivity.x);
-                if (app->getKeyboard().isPressed(GLFW_KEY_A))
-                    position += right * (deltaTime * current_sensitivity.x);
+            if (app->getKeyboard().isPressed(GLFW_KEY_D))
+                position -= right * (deltaTime * current_sensitivity.x);
 
             // Q & E moves the player up and down
             // player cannot move in y direction
@@ -270,17 +313,9 @@ namespace our
 
             // if (app->getKeyboard().isPressed(GLFW_KEY_S)){
             //     if(!downCollider){
-                
+
             //     position += front * (deltaTime * current_sensitivity.z);
             // }}
-
-            if(!upCollider){
-                if (app->getKeyboard().isPressed(GLFW_KEY_W))
-                position -= front * (deltaTime * current_sensitivity.z);
-
-            // A & D moves the player left or right
-
-            }
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked
@@ -293,5 +328,4 @@ namespace our
             }
         }
     };
-
 }
