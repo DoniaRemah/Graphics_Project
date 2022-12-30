@@ -139,6 +139,38 @@ namespace our
                     float act_wall_top = objPosition.z + objScale.z;
                     float act_wall_below = objPosition.z - objScale.z;
 
+                    // COLLIDE FROM RIGHT
+
+                    if (app->getKeyboard().isPressed(GLFW_KEY_D))
+                    {
+                        act_coliding = objPosition.x + objScale.x;
+                        act_ball = position.x - 0.5;
+
+                        distance = act_ball - act_coliding;
+
+                        // std::cout << "Position of ball is " << act_ball << std::endl;
+                        // std::cout << "Objpos.x : " << act_coliding << std::endl;
+                        // std::cout << "Distance is : " << distance << std::endl;
+                        // std::cout << "Mov : " << (deltaTime * current_sensitivity.z) << std::endl;
+
+                        if (act_ball >= act_coliding) // ball is left of wall
+                        {
+                            // std::cout << "Top of ball: " << act_ball_top << std::endl;
+                            // std::cout << "Below of wall: " << act_wall_below << std::endl;
+
+                            // std::cout << "Below of ball: " << act_ball_below << std::endl;
+                            // std::cout << "Top of wall: " << act_wall_top << std::endl;
+
+                            if (act_ball_top > act_wall_below && act_ball_below < act_wall_top)
+                            {
+                                if (min_distance > distance)
+                                {
+                                    min_distance = distance;
+                                }
+                            }
+                        }
+                    }
+
                     // COLLIDE FROM LEFT
 
                     if (app->getKeyboard().isPressed(GLFW_KEY_A))
@@ -148,25 +180,13 @@ namespace our
 
                         distance = act_coliding - act_ball;
 
-                        std::cout << "Position of ball is " << act_ball << std::endl;
-                        std::cout << "Objpos.x : " << act_coliding << std::endl;
-                        std::cout << "Distance is : " << distance << std::endl;
-                        std::cout << "Mov : " << (deltaTime * current_sensitivity.z) << std::endl;
-
                         if (act_ball <= act_coliding) // ball is right of wall
                         {
-                            std::cout << "Top of ball: " << act_ball_top << std::endl;
-                            std::cout << "Below of wall: " << act_wall_below << std::endl;
-
-                            std::cout << "Below of ball: " << act_ball_below << std::endl;
-                            std::cout << "Top of wall: " << act_wall_top << std::endl;
-
                             if (act_ball_top > act_wall_below && act_ball_below < act_wall_top)
                             {
                                 if (min_distance > distance)
                                 {
                                     min_distance = distance;
-                                    // std::cout << "Value of new min distance " << min_distance << std::endl;
                                 }
                             }
                         }
@@ -187,7 +207,6 @@ namespace our
                                 if (min_distance > distance)
                                 {
                                     min_distance = distance;
-                                    // std::cout << "Value of new min distance " << min_distance << std::endl;
                                 }
                             }
                         }
@@ -199,25 +218,14 @@ namespace our
                         act_ball = position.z - 0.5;
                         act_coliding = objPosition.z + objScale.z;
                         distance = act_ball - act_coliding;
-                        // std::cout << "Position of ball is "<< act_ball << std::endl;
-                        // std::cout << "Objpos.z : " << act_coliding << std::endl;
-                        // std::cout << "Objscale.z : " << objScale.z << std::endl;
-                        // std::cout << "Distance is : " <<  distance << std::endl;
-                        // std::cout << "Mov : " << (deltaTime * current_sensitivity.z)<< std::endl;
 
                         if (act_ball >= act_coliding) // ball is above of wall
                         {
-                            // std::cout << "----------------------- "<< std::endl;
-                            // std::cout << "Right of ball is:  "<< act_ballx_right << std::endl;
-                            // std::cout << "left wall is:  "<< act_colidingX_left << std::endl;
-                            // std::cout << "Right of wall is:  "<< act_colidingX_right << std::endl;
-                            // std::cout << "left of ball is: " <<  act_ballx_left<< std::endl;
                             if (act_ballx_left > act_colidingX_right && act_ballx_right < act_colidingX_left)
                             {
                                 if (min_distance > distance)
                                 {
                                     min_distance = distance;
-                                    // std::cout << "Value of new min distance " << min_distance << std::endl;
                                 }
                             }
                         }
@@ -269,6 +277,14 @@ namespace our
                 }
             }
 
+            if (app->getKeyboard().isPressed(GLFW_KEY_D))
+            {
+                if (min_distance >= mov)
+                {
+                    position -= right * (deltaTime * current_sensitivity.x);
+                }
+            }
+
             // If the left mouse button is pressed, we get the change in the mouse location
             // and use it to update the camera rotation
             if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1))
@@ -300,9 +316,6 @@ namespace our
 
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
-
-            if (app->getKeyboard().isPressed(GLFW_KEY_D))
-                position -= right * (deltaTime * current_sensitivity.x);
 
             // Q & E moves the player up and down
             // player cannot move in y direction
