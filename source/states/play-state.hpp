@@ -45,7 +45,7 @@ class Playstate: public our::State {
         auto& keyboard = getApp()->getKeyboard();
 
         if(keyboard.justPressed(GLFW_KEY_ESCAPE)){
-            // If the escape  key is pressed in this frame, go to the play state
+            // If the escape  key is pressed in this frame, go to the menu state
             getApp()->changeState("menu");
         }
     }
