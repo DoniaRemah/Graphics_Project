@@ -69,6 +69,12 @@ set(COMMON_SOURCES
         source/common/ecs/world.hpp
         source/common/ecs/world.cpp
 
+        source/common/components/player.hpp
+        source/common/components/player.cpp
+
+        source/common/components/collisions.hpp
+        source/common/components/collisions.cpp
+
         source/common/components/camera.hpp
         source/common/components/camera.cpp
         source/common/components/mesh-renderer.hpp

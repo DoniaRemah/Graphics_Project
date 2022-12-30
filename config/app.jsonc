@@ -201,41 +201,53 @@
                 ]
             },
             {
-                "name":"wall0",
+                "name":"h0",
                 "position": [7, 1, 5.8],
-                "rotation": [0, 90, 0],
-                "scale": [0.2, 1, 3],
+                "rotation": [0,0, 0],
+                "scale": [3, 1, 0.2],
                 "components": [
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
                         "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
                     }
                 ]
             },
             {
-                "name":"wall1",
+                "name":"h1",
                 "position": [8, 1,2.5],
-                "rotation": [0, 90, 0],
-                "scale": [0.2, 1, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "cube",
-                        "material": "wall"
-                    }
-                ]
-            },
-            {
-                "name":"wall2",
-                "position": [2, 1,8],
-                "rotation": [0, 90, 0],
+                "rotation": [0, 0, 0],
                 "scale": [2, 1, 0.2],
                 "components": [
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
                         "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"h2",
+                "position": [2, 1,8],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
                     }
                 ]
             }

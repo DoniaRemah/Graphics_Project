@@ -10,7 +10,7 @@ namespace our
         if (!data.is_object())
             return;
 
-        std::string obstucaseTypeStr = data.value("obstucaseType", obstucaseType);
+        std::string obstucaseTypeStr = data.value("obstucaseType", "score");
         if (obstucaseTypeStr == "score")
         {
             obstucaseType = CollisionType::SCORE;

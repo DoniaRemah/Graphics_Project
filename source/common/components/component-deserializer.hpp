@@ -1,10 +1,12 @@
 #pragma once
 
+#include "player.hpp"
 #include "../ecs/entity.hpp"
 #include "camera.hpp"
 #include "mesh-renderer.hpp"
 #include "free-camera-controller.hpp"
 #include "movement.hpp"
+#include "collisions.hpp"
 
 namespace our {
 
@@ -23,6 +25,12 @@ namespace our {
         }else if (type == MovementComponent::getID()) {
             component = entity->addComponent<MovementComponent>();
         }
+        else if (type == PlayerComponent::getID() ){
+            component = entity->addComponent<PlayerComponent>();
+        }
+        else if (type == CollisionComponent::getID() ){
+            component = entity->addComponent<CollisionComponent>();
+        } 
         if(component) component->deserialize(data);
     }
 

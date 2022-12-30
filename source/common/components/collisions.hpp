@@ -23,7 +23,7 @@ namespace our
     public:
         CollisionType obstucaseType;
         // The ID of this component type is "Movement"
-        static std::string getID() { return "Collision"; }
+        static std::string getID() { return "collision"; }
         CollisionType getobstucaseType() { return this->obstucaseType; }
 
         // Reads linearVelocity & angularVelocity from the given json object
