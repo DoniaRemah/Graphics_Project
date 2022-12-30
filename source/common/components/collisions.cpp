@@ -15,6 +15,10 @@ namespace our
         {
             obstucaseType = CollisionType::SCORE;
         }
+        else if (obstucaseTypeStr == "wall")
+        {
+            obstucaseType = CollisionType::WALL;
+        }
         else
         {
             obstucaseType = CollisionType::WIN;

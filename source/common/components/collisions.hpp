@@ -10,6 +10,7 @@ namespace our
     enum class CollisionType
     {
         SCORE,
+        WALL,
         WIN
     };
 
