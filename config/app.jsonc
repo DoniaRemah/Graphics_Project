@@ -203,7 +203,7 @@
                 "name":"southWall",
                 "position": [0, 1, -9.8],
                 "rotation": [0, 0, 0],
-                "scale": [10, 1,0.2 ],
+                "scale": [10, 1, 0.2],
                 "components": [
                     {
                         "type": "Mesh Renderer",
@@ -217,9 +217,9 @@
                 ]
             },
             {
-                "name":"h0",
+                "name":"wall0",
                 "position": [7, 1, 5.8],
-                "rotation": [0,0, 0],
+                "rotation": [0, 0, 0],
                 "scale": [3, 1, 0.2],
                 "components": [
                     {
@@ -234,7 +234,7 @@
                 ]
             },
             {
-                "name":"h1",
+                "name":"wall1",
                 "position": [8, 1,2.5],
                 "rotation": [0, 0, 0],
                 "scale": [2, 1, 0.2],
@@ -251,8 +251,8 @@
                 ]
             },
             {
-                "name":"h2",
-                "position": [2, 1,8],
+                "name":"wall2",
+                "position": [1.5, 1,8],
                 "rotation": [0, 0, 0],
                 "scale": [0.2, 1, 2],
                 "components": [
@@ -266,9 +266,415 @@
                         "obstucaseType" : "wall"
                     }
                 ]
+            },
+            {
+                "name":"wall3",
+                "position": [8, 1,-3],
+                "rotation": [0, 0, 0],
+                "scale": [2, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall4",
+                "position": [5.9,1,-1.7],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 1.5],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall5",
+                "position": [4,1,-0.4],
+                "rotation": [0, 0, 0],
+                "scale": [2, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall6",
+                "position": [2.2, 1,0.8],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 1.4],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall7",
+                "position": [6, 1,-7.8],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall8",
+                "position": [3, 1,-8.7],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall9",
+                "position": [1.5,1,-7.5],
+                "rotation": [0, 0, 0],
+                "scale": [1.7, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall10",
+                "position": [-3, 1,-7.5],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 2.5],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall11",
+                "position": [-7.5,1,-5.8],
+                "rotation": [0, 0, 0],
+                "scale": [2.2, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall12",
+                "position": [-7.5, 1,-4],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 1.8],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall13",
+                "position": [-7.5, 1,2],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 1.5],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall14",
+                "position": [-8.5,1,3.5],
+                "rotation": [0, 0, 0],
+                "scale": [1.2, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall15",
+                "position": [-6,1,0.7],
+                "rotation": [0, 0, 0],
+                "scale": [1.5, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall16",
+                "position": [-5.5, 1,-1],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 1.5],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall17",
+                "position": [-4.7, 1,1.3],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 0.7],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall18",
+                "position": [-3,1,1.8],
+                "rotation": [0, 0, 0],
+                "scale": [1.5, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall19",
+                "position": [-5.5, 1,7.3],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 2.6],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall20",
+                "position": [-4.5,1,4.9],
+                "rotation": [0, 0, 0],
+                "scale": [1, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall21",
+                "position": [-3.6, 1,5.2],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 1.5],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall22",
+                "position": [-1, 1,6.5],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 2.8],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall23",
+                "position": [0,1,3.9],
+                "rotation": [0, 0, 0],
+                "scale": [0.9, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall24",
+                "position": [0.3, 1,0],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 4],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall25",
+                "position": [4, 1,-4],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 1.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"wall26",
+                "position": [1.5,1,-4],
+                "rotation": [0, 0, 0],
+                "scale": [2.4, 1, 0.2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "wall"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "wall"
+                    }
+                ]
             }
-
-
         ]
     }
 }
