@@ -706,11 +706,11 @@
                     {
                         "type": "collision",
                         "obstucaseType" : "score"
-                    },
-                    {
-                        "type": "Movement",
-                        "angularVelocity": [70,70, 0]
                     }
+                    // {
+                    //     "type": "Movement",
+                    //     "angularVelocity": [70,70, 0]
+                    // }
                 ]
             }
         ]

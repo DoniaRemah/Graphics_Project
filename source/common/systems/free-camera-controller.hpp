@@ -97,8 +97,7 @@ namespace our
             CollisionComponent *collision = nullptr;
             Entity *Collision_entity = nullptr;
 
-
-            std:: string act_Collision_Type;
+            std::string act_Collision_Type;
             Entity *actual_collision_entity = nullptr;
 
             float min_distance = INT_MAX - 1;
@@ -156,11 +155,12 @@ namespace our
                         {
                             if (min_distance > distance)
                             {
-                                if(collision->getobstucaseType() == CollisionType::SCORE){
+                                if (collision->getobstucaseType() == CollisionType::SCORE)
+                                {
                                     act_Collision_Type = "score";
                                     actual_collision_entity = Collision_entity;
                                 }
-                                
+
                                 min_distance = distance;
                             }
                         }
@@ -182,6 +182,11 @@ namespace our
                         {
                             if (min_distance > distance)
                             {
+                                if (collision->getobstucaseType() == CollisionType::SCORE)
+                                {
+                                    act_Collision_Type = "score";
+                                    actual_collision_entity = Collision_entity;
+                                }
                                 min_distance = distance;
                             }
                         }
@@ -202,6 +207,11 @@ namespace our
                         {
                             if (min_distance > distance)
                             {
+                                if (collision->getobstucaseType() == CollisionType::SCORE)
+                                {
+                                    act_Collision_Type = "score";
+                                    actual_collision_entity = Collision_entity;
+                                }
                                 min_distance = distance;
                             }
                         }
@@ -221,6 +231,11 @@ namespace our
                         {
                             if (min_distance > distance)
                             {
+                                if (collision->getobstucaseType() == CollisionType::SCORE)
+                                {
+                                    act_Collision_Type = "score";
+                                    actual_collision_entity = Collision_entity;
+                                }
                                 min_distance = distance;
                             }
                         }
@@ -236,6 +251,15 @@ namespace our
                 {
                     position += front * (deltaTime * current_sensitivity.z);
                 }
+                else // if it collided
+                {
+                    if (act_Collision_Type == "score")
+                    {
+                        app->score += 10;
+                        world->markForRemoval(actual_collision_entity);
+                        position += front * (deltaTime * current_sensitivity.z);
+                    }
+                }
             }
 
             if (app->getKeyboard().isPressed(GLFW_KEY_W))
@@ -243,6 +267,15 @@ namespace our
                 if (min_distance >= mov)
                 {
                     position -= front * (deltaTime * current_sensitivity.z);
+                }
+                else // if it collided
+                {
+                    if (act_Collision_Type == "score")
+                    {
+                        app->score += 10;
+                        world->markForRemoval(actual_collision_entity);
+                        position -= front * (deltaTime * current_sensitivity.z);
+                    }
                 }
             }
 
@@ -252,13 +285,21 @@ namespace our
                 {
                     position += right * (deltaTime * current_sensitivity.x);
                 }
+                else // if it collided
+                {
+                    if (act_Collision_Type == "score")
+                    {
+                        app->score += 10;
+                        world->markForRemoval(actual_collision_entity);
+                        position += right * (deltaTime * current_sensitivity.x);
+                    }
+                }
             }
 
             if (app->getKeyboard().isPressed(GLFW_KEY_D))
             {
                 if (min_distance >= mov) // if it didn't collide
                 {
-
                     position -= right * (deltaTime * current_sensitivity.x);
                 }
                 else // if it collided
@@ -266,7 +307,6 @@ namespace our
                     if (act_Collision_Type == "score")
                     {
                         app->score += 10;
-                        std:: cout << "score is: " << app->score << std:: endl;
                         world->markForRemoval(actual_collision_entity);
                         position -= right * (deltaTime * current_sensitivity.x);
                     }
