@@ -11,8 +11,8 @@
     },
     "scene": {
         "renderer":{
-            "sky": "assets/textures/sky.png",
-            "postprocess": "assets/shaders/postprocess/filmgrain.frag"
+            "sky": "assets/textures/sky.png"
+            // "postprocess": "assets/shaders/postprocess/filmgrain.frag"
         },
         "assets":{
             "shaders":{
@@ -27,12 +27,14 @@
             },
             "textures":{
                 "ground":"assets/textures/ground.jpg",
-                "wall":"assets/textures/brick_wall.jpg"
+                "wall":"assets/textures/brick_wall.jpg",
+                "coin":"assets/textures/yellowCoin.png"
             },
             "meshes":{
                 "cube": "assets/models/cube.obj",
                 "plane": "assets/models/plane.obj",
-                "sphere": "assets/models/sphere.obj"
+                "sphere": "assets/models/sphere.obj",
+                "coin": "assets/models/yellowCoin.obj"
             },
             "samplers":{
                 "default":{},
@@ -96,6 +98,21 @@
                         }
                     },
                     "tint":[1,0.84,0, 1]
+                },
+                "tex_coin":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "texture": "coin",
+                    "sampler": "default"
                 }
             }
         },
@@ -672,6 +689,27 @@
                     {
                         "type": "collision",
                         "obstucaseType" : "wall"
+                    }
+                ]
+            },
+            {
+                "name":"coin0",
+                "position": [7, 0.8, 4.2],
+                "rotation": [45, 45, 45],
+                "scale": [0.25, 0.25, 0.25],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "coin"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "score"
+                    },
+                    {
+                        "type": "Movement",
+                        "angularVelocity": [70,70, 0]
                     }
                 ]
             }
