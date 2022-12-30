@@ -113,6 +113,19 @@
                     "tint": [1, 1, 1, 1],
                     "texture": "coin",
                     "sampler": "default"
+                },
+                "win":{
+                    "type": "tinted",
+                    "shader": "tinted",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint":[1,0,0, 0.5]
                 }
             }
         },
@@ -706,11 +719,28 @@
                     {
                         "type": "collision",
                         "obstucaseType" : "score"
+                    },
+                    {
+                        "type": "Movement",
+                        "angularVelocity": [0,70, 0]
                     }
-                    // {
-                    //     "type": "Movement",
-                    //     "angularVelocity": [70,70, 0]
-                    // }
+                ]
+            },
+            {
+                "name":"win",
+                "position": [-9.8, 1, -7.8],
+                "rotation": [0, 0, 0],
+                "scale": [0.2, 1, 1.8],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "win"
+                    },
+                    {
+                        "type": "collision",
+                        "obstucaseType" : "win"
+                    }
                 ]
             }
         ]
