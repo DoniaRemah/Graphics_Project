@@ -241,12 +241,16 @@ namespace our
                     }
                 }
             }
+
+            // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
+            // if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
+            //     current_sensitivity *= controller->speedupFactor;
+
             if (app->getKeyboard().isPressed(GLFW_KEY_S))
             {
                 if (min_distance >= mov)
                 {
                     position += front * (deltaTime * current_sensitivity.z);
-                    // std::cout << "///////// The ball will move /////////" << std::endl;
                 }
             }
 
@@ -297,27 +301,6 @@ namespace our
             fov = glm::clamp(fov, glm::pi<float>() * 0.01f, glm::pi<float>() * 0.99f); // We keep the fov in the range 0.01*PI to 0.99*PI
             camera->fovY = fov;
 
-            // We get the camera model matrix (relative to its parent) to compute the front, up and right directions
-
-            // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
-            if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
-                current_sensitivity *= controller->speedupFactor;
-
-            // We change the camera position based on the keys WASD/QE
-            // S & W moves the player back and forth
-
-            // Q & E moves the player up and down
-            // player cannot move in y direction
-            // if (app->getKeyboard().isPressed(GLFW_KEY_Q))
-            //     position += up * (deltaTime * current_sensitivity.y);
-            // if (app->getKeyboard().isPressed(GLFW_KEY_E))
-            //     position -= up * (deltaTime * current_sensitivity.y);
-
-            // if (app->getKeyboard().isPressed(GLFW_KEY_S)){
-            //     if(!downCollider){
-
-            //     position += front * (deltaTime * current_sensitivity.z);
-            // }}
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked
