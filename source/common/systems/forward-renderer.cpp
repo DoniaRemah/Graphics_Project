@@ -1,6 +1,7 @@
 #include "forward-renderer.hpp"
 #include "../mesh/mesh-utils.hpp"
 #include "../texture/texture-utils.hpp"
+#include <GLFW/glfw3.h>
 
 namespace our
 {
@@ -289,6 +290,8 @@ namespace our
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
             // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
             postprocessMaterial->setup();
+            double current_frame_time = glfwGetTime();
+            postprocessMaterial->shader->set("time", (float)current_frame_time);
             glBindVertexArray(this->postProcessVertexArray);
             glDrawArrays(GL_TRIANGLES, 0, 3);     
         }

@@ -12,7 +12,7 @@
     "scene": {
         "renderer":{
             "sky": "assets/textures/sky.png",
-            "postprocess": "assets/shaders/postprocess/vignette.frag"
+            "postprocess": "assets/shaders/postprocess/filmgrain.frag"
         },
         "assets":{
             "shaders":{
@@ -135,7 +135,7 @@
                 "children": [
                     {
                         "position": [0, 15, -20],
-                        "rotation": [-40, 180, 0],
+                        "rotation": [-45, 180, 0],
                         "components": [
                             {
                                 "type": "Camera"
