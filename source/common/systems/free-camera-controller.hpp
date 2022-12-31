@@ -305,7 +305,7 @@ namespace our
 
                     if (act_Collision_Type == "win")
                     {
-                        app->changeState("win");
+                        app->winner=true;
                     }
                 }
             }
@@ -330,7 +330,7 @@ namespace our
 
                     if (act_Collision_Type == "win")
                     {
-                        app->changeState("win");
+                        app->winner=true;
                     }
                 }
             }
@@ -355,7 +355,7 @@ namespace our
 
                     if (act_Collision_Type == "win")
                     {
-                        app->changeState("win");
+                        app->winner=true;
                     }
                 }
             }
@@ -380,7 +380,7 @@ namespace our
 
                     if (act_Collision_Type == "win")
                     {
-                        app->changeState("win");
+                        app->winner=true;
                     }
                 }
             }

@@ -76,12 +76,12 @@ class Losestate: public our::State {
         // - The argument list () which is the arguments that the lambda should receive when it is called.
         //      We leave it empty since button actions receive no input.
         // - The body {} which contains the code to be executed. 
-        buttons[0].position = {685.0f, 365.0f};
-        buttons[0].size = {501.0f, 45.0f};
+        buttons[0].position = {360.0f, 525.0f};
+        buttons[0].size = {560.0f, 47.0f};
         buttons[0].action = [this](){this->getApp()->changeState("play");};
 
-        buttons[1].position = {725.0f, 435.0f};
-        buttons[1].size = {421.0f, 45.0f};
+        buttons[1].position = {450.0f, 598.0f};
+        buttons[1].size = {382.0f, 47.0f};
         buttons[1].action = [this](){this->getApp()->close();};
     }
 
