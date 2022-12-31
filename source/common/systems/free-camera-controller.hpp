@@ -159,9 +159,11 @@ namespace our
                                 {
                                     act_Collision_Type = "score";
                                     actual_collision_entity = Collision_entity;
-                                }else{
+                                }
+                                else if (collision->getobstucaseType() == CollisionType::WALL)
+                                {
                                     act_Collision_Type = "wall";
-                                    actual_collision_entity = Collision_entity;                                    
+                                    actual_collision_entity = Collision_entity;
                                 }
 
                                 min_distance = distance;
@@ -189,9 +191,11 @@ namespace our
                                 {
                                     act_Collision_Type = "score";
                                     actual_collision_entity = Collision_entity;
-                                }else{
+                                }
+                                else if (collision->getobstucaseType() == CollisionType::WALL)
+                                {
                                     act_Collision_Type = "wall";
-                                    actual_collision_entity = Collision_entity;                                    
+                                    actual_collision_entity = Collision_entity;
                                 }
                                 min_distance = distance;
                             }
@@ -217,9 +221,11 @@ namespace our
                                 {
                                     act_Collision_Type = "score";
                                     actual_collision_entity = Collision_entity;
-                                }else{
+                                }
+                                else if (collision->getobstucaseType() == CollisionType::WALL)
+                                {
                                     act_Collision_Type = "wall";
-                                    actual_collision_entity = Collision_entity;                                    
+                                    actual_collision_entity = Collision_entity;
                                 }
                                 min_distance = distance;
                             }
@@ -244,9 +250,11 @@ namespace our
                                 {
                                     act_Collision_Type = "score";
                                     actual_collision_entity = Collision_entity;
-                                }else{
+                                }
+                                else if (collision->getobstucaseType() == CollisionType::WALL)
+                                {
                                     act_Collision_Type = "wall";
-                                    actual_collision_entity = Collision_entity;                                    
+                                    actual_collision_entity = Collision_entity;
                                 }
                                 min_distance = distance;
                             }
@@ -367,7 +375,8 @@ namespace our
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked
-        void exit()
+        void
+        exit()
         {
             if (mouse_locked)
             {
