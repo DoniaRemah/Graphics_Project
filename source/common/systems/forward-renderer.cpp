@@ -63,8 +63,8 @@ namespace our
             // TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
             //  Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
             //  The depth format can be (Depth component with 24 bits).
-            colorTarget = texture_utils::empty(GL_RGBA8,windowSize);
-            depthTarget = texture_utils::empty(GL_DEPTH_COMPONENT24,windowSize);
+            colorTarget = texture_utils::empty(GL_RGBA8, windowSize);
+            depthTarget = texture_utils::empty(GL_DEPTH_COMPONENT24, windowSize);
 
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postprocessFrameBuffer);
 
@@ -130,6 +130,7 @@ namespace our
         CameraComponent *camera = nullptr;
         opaqueCommands.clear();
         transparentCommands.clear();
+        lightSources.clear();
         for (auto entity : world->getEntities())
         {
             // If we hadn't found a camera yet, we look for a camera in this entity
@@ -154,6 +155,11 @@ namespace our
                     // Otherwise, we add it to the opaque command list
                     opaqueCommands.push_back(command);
                 }
+            }
+
+            if (auto lightComp = entity->getComponent<LightComponent>(); lightComp)
+            {
+                lightSources.push_back(lightComp);
             }
         }
 
@@ -230,10 +236,47 @@ namespace our
         //  Don't forget to set the "transform" uniform
         //  to be equal the model-view-projection matrix for each render command
 
+        glm::mat4 MVP_O;
+        glm::vec3 the_eye = eye;
+
         for (auto command : opaqueCommands)
         {
             command.material->setup();
-            command.material->shader->set("transform", VP * command.localToWorld);
+            MVP_O = VP * command.localToWorld;
+            // if the material of the object is lighted
+            if (auto light_material = dynamic_cast<LitMaterial *>(command.material); light_material)
+            {
+
+                light_material->shader->set("VP", VP);
+                light_material->shader->set("M", command.localToWorld);
+                light_material->shader->set("eye", the_eye);
+                light_material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
+                light_material->shader->set("light_count", (int)lightSources.size());
+
+                for (int i = 0; i < (int)lightSources.size(); i++)
+                {
+                    if (lightSources[i]->lightType >= 0)
+                    {
+                        // calculate position and direction of the light source based on the object
+                        glm::vec3 position = lightSources[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
+                        glm::vec3 direction = lightSources[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, -1, 0, 0);
+
+                        light_material->shader->set("lights[" + std::to_string(i) + "].direction", direction);
+                        light_material->shader->set("lights[" + std::to_string(i) + "].color", lightSources[i]->color);
+                        light_material->shader->set("lights[" + std::to_string(i) + "].type", lightSources[i]->lightType);
+                        light_material->shader->set("lights[" + std::to_string(i) + "].position", position);
+                        light_material->shader->set("lights[" + std::to_string(i) + "].diffuse", lightSources[i]->diffuse);
+                        light_material->shader->set("lights[" + std::to_string(i) + "].specular", lightSources[i]->specular);
+                        light_material->shader->set("lights[" + std::to_string(i) + "].attenuation", lightSources[i]->attenuation);
+                        light_material->shader->set("lights[" + std::to_string(i) + "].cone_angles", lightSources[i]->cone_angles);
+                    }
+                }
+            }
+            else
+            {
+                command.material->shader->set("transform", MVP_O);
+            }
+
             command.mesh->draw();
         }
 
@@ -293,7 +336,13 @@ namespace our
             double current_frame_time = glfwGetTime();
             postprocessMaterial->shader->set("time", (float)current_frame_time);
             glBindVertexArray(this->postProcessVertexArray);
-            glDrawArrays(GL_TRIANGLES, 0, 3);     
+            glDrawArrays(GL_TRIANGLES, 0, 3);
+        }
+
+        if (lightMaterial)
+        {
+            lightMaterial->setup();
+            // lightMaterial->shader->set()
         }
     }
 

@@ -7,51 +7,54 @@
 #include <type_traits>
 #include <glm/glm.hpp>
 
-// here we are creating a class for the light component
 
-namespace our
+//here we are creating a class for the light component
+
+namespace our 
 {
     // An enum that defines the type of the light source
-    // 0 is directional
-    // 1 is spot
-    // 2 is point
-    enum class LightType
+    //0 is directional
+    //1 is spot 
+    //2 is point
+    enum class LightType 
     {
         DIRECTIONAL,
         SPOT,
         POINT
     };
 
-    class LightComponent : public Component
-    // the light component class which inherits from the component class
+
+    class LightComponent : public Component 
+    //the light component class which inherits from the component class
     {
     public:
-        // the light properties
-        // everything that will be read from the json file
-        // EXCEPT the position and direction
-        // which will be calculated from the entity component
-        // in the forward renderer
-        LightType lightType;
+        //the light properties
+        //everything that will be read from the json file
+        //EXCEPT the position and direction 
+        //which will be calculated from the entity component
+        //in the forward renderer
+        int lightType; 
         glm::vec3 diffuse;
         glm::vec3 specular;
         glm::vec4 color;
-        glm::vec3 attenuation;
-        glm::vec2 cone_angles;
+        glm::vec3 attenuation; 
+        glm::vec2 cone_angles; 
 
-        // since the type of light will be specified in the json file as a string
-        // DIRECTIONAL
-        // POINT
-        // SPOT
+        //since the type of light will be specified in the json file as a string
+        //DIRECTIONAL
+        //POINT
+        //SPOT
         std::string lightTypeStr;
-
-        // overriding the deserializer function
-        // to read the light data from the json file
-        void deserialize(const nlohmann::json &data) override;
-
-        // the id is "light"
-        // which is read from the json file and specifies
-        // that this is a light component
+        
+        //overriding the deserializer function 
+        //to read the light data from the json file
+        void deserialize(const nlohmann::json& data) override;
+        
+        //the id is "light"
+        //which is read from the json file and specifies
+        //that this is a light component
         static std::string getID() { return "light"; }
+
     };
 
 }
