@@ -142,7 +142,7 @@ namespace our
 
                 // COLLIDE FROM RIGHT
 
-                if (app->getKeyboard().isPressed(GLFW_KEY_D))
+                if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT) || app->getKeyboard().isPressed(GLFW_KEY_D))
                 {
                     act_coliding = objPosition.x + objScale.x;
                     act_ball = position.x - 0.5;
@@ -179,7 +179,7 @@ namespace our
 
                 // COLLIDE FROM LEFT
 
-                if (app->getKeyboard().isPressed(GLFW_KEY_A))
+                if (app->getKeyboard().isPressed(GLFW_KEY_LEFT) || app->getKeyboard().isPressed(GLFW_KEY_A))
                 {
                     act_coliding = objPosition.x - objScale.x;
                     act_ball = position.x + 0.5;
@@ -215,7 +215,7 @@ namespace our
 
                 // COLLIDE FROM ABOVE BALL
 
-                if (app->getKeyboard().isPressed(GLFW_KEY_W))
+                if (app->getKeyboard().isPressed( GLFW_KEY_UP ) || app->getKeyboard().isPressed(GLFW_KEY_W))
                 {
                     act_ball = position.z + 0.5;
                     act_coliding = objPosition.z - objScale.z;
@@ -249,7 +249,7 @@ namespace our
                 }
 
                 // COLLIDE FROM BELOW OF BALL
-                if (app->getKeyboard().isPressed(GLFW_KEY_S))
+                if (app->getKeyboard().isPressed(GLFW_KEY_DOWN) || app->getKeyboard().isPressed(GLFW_KEY_S))
                 {
                     act_ball = position.z - 0.5;
                     act_coliding = objPosition.z + objScale.z;
@@ -285,7 +285,7 @@ namespace our
 
             ///////////////////////////////////////////////////////////// CHECKING TYPE OF COLLISION
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_S))
+            if (app->getKeyboard().isPressed(GLFW_KEY_DOWN) || app->getKeyboard().isPressed(GLFW_KEY_S))
             {
                 if (min_distance >= mov)
                 {
@@ -310,7 +310,7 @@ namespace our
                 }
             }
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_W))
+            if (app->getKeyboard().isPressed(GLFW_KEY_UP) || app->getKeyboard().isPressed(GLFW_KEY_W))
             {
                 if (min_distance >= mov)
                 {
@@ -335,7 +335,7 @@ namespace our
                 }
             }
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_A))
+            if (app->getKeyboard().isPressed(GLFW_KEY_LEFT) || app->getKeyboard().isPressed(GLFW_KEY_A))
             {
                 if (min_distance >= mov)
                 {
@@ -360,7 +360,7 @@ namespace our
                 }
             }
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_D))
+            if (app->getKeyboard().isPressed(GLFW_KEY_RIGHT) || app->getKeyboard().isPressed(GLFW_KEY_D))
             {
                 if (min_distance >= mov) // if it didn't collide
                 {
