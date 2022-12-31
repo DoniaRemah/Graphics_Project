@@ -159,6 +159,9 @@ namespace our
                                 {
                                     act_Collision_Type = "score";
                                     actual_collision_entity = Collision_entity;
+                                }else{
+                                    act_Collision_Type = "wall";
+                                    actual_collision_entity = Collision_entity;                                    
                                 }
 
                                 min_distance = distance;
@@ -186,6 +189,9 @@ namespace our
                                 {
                                     act_Collision_Type = "score";
                                     actual_collision_entity = Collision_entity;
+                                }else{
+                                    act_Collision_Type = "wall";
+                                    actual_collision_entity = Collision_entity;                                    
                                 }
                                 min_distance = distance;
                             }
@@ -211,6 +217,9 @@ namespace our
                                 {
                                     act_Collision_Type = "score";
                                     actual_collision_entity = Collision_entity;
+                                }else{
+                                    act_Collision_Type = "wall";
+                                    actual_collision_entity = Collision_entity;                                    
                                 }
                                 min_distance = distance;
                             }
@@ -235,6 +244,9 @@ namespace our
                                 {
                                     act_Collision_Type = "score";
                                     actual_collision_entity = Collision_entity;
+                                }else{
+                                    act_Collision_Type = "wall";
+                                    actual_collision_entity = Collision_entity;                                    
                                 }
                                 min_distance = distance;
                             }
@@ -258,6 +270,9 @@ namespace our
                         app->score += 10;
                         world->markForRemoval(actual_collision_entity);
                         position += front * (deltaTime * current_sensitivity.z);
+                        actual_collision_entity = nullptr;
+                        min_distance = INT_MAX - 1;
+                        act_Collision_Type = "";
                     }
                 }
             }
@@ -275,6 +290,9 @@ namespace our
                         app->score += 10;
                         world->markForRemoval(actual_collision_entity);
                         position -= front * (deltaTime * current_sensitivity.z);
+                        actual_collision_entity = nullptr;
+                        min_distance = INT_MAX - 1;
+                        act_Collision_Type = "";
                     }
                 }
             }
@@ -292,6 +310,9 @@ namespace our
                         app->score += 10;
                         world->markForRemoval(actual_collision_entity);
                         position += right * (deltaTime * current_sensitivity.x);
+                        actual_collision_entity = nullptr;
+                        min_distance = INT_MAX - 1;
+                        act_Collision_Type = "";
                     }
                 }
             }
@@ -309,6 +330,9 @@ namespace our
                         app->score += 10;
                         world->markForRemoval(actual_collision_entity);
                         position -= right * (deltaTime * current_sensitivity.x);
+                        actual_collision_entity = nullptr;
+                        min_distance = INT_MAX - 1;
+                        act_Collision_Type = "";
                     }
                 }
             }
