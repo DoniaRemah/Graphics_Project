@@ -1,7 +1,7 @@
 #pragma once
 
 #include <application.hpp>
-
+#include <GLFW/glfw3.h>
 #include <ecs/world.hpp>
 #include <systems/forward-renderer.hpp>
 #include <systems/free-camera-controller.hpp>
@@ -15,6 +15,8 @@ class Playstate: public our::State {
     our::ForwardRenderer renderer;
     our::FreeCameraControllerSystem cameraController;
     our::MovementSystem movementSystem;
+
+    double time=0;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -36,6 +38,14 @@ class Playstate: public our::State {
 
     void onDraw(double deltaTime) override {
         // Here, we just run a bunch of systems to control the world logic
+
+        time+= deltaTime;
+
+        if(time >= 60){
+            getApp()->changeState("game_over");
+            return;
+        }
+
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         // And finally we use the renderer system to draw the scene
