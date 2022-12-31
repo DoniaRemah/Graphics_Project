@@ -165,6 +165,11 @@ namespace our
                                     act_Collision_Type = "wall";
                                     actual_collision_entity = Collision_entity;
                                 }
+                                else if (collision->getobstucaseType() == CollisionType::WIN)
+                                {
+                                    act_Collision_Type = "win";
+                                    actual_collision_entity = Collision_entity;
+                                }
 
                                 min_distance = distance;
                             }
@@ -197,6 +202,11 @@ namespace our
                                     act_Collision_Type = "wall";
                                     actual_collision_entity = Collision_entity;
                                 }
+                                else if (collision->getobstucaseType() == CollisionType::WIN)
+                                {
+                                    act_Collision_Type = "win";
+                                    actual_collision_entity = Collision_entity;
+                                }
                                 min_distance = distance;
                             }
                         }
@@ -225,6 +235,11 @@ namespace our
                                 else if (collision->getobstucaseType() == CollisionType::WALL)
                                 {
                                     act_Collision_Type = "wall";
+                                    actual_collision_entity = Collision_entity;
+                                }
+                                else if (collision->getobstucaseType() == CollisionType::WIN)
+                                {
+                                    act_Collision_Type = "win";
                                     actual_collision_entity = Collision_entity;
                                 }
                                 min_distance = distance;
@@ -256,6 +271,11 @@ namespace our
                                     act_Collision_Type = "wall";
                                     actual_collision_entity = Collision_entity;
                                 }
+                                else if (collision->getobstucaseType() == CollisionType::WIN)
+                                {
+                                    act_Collision_Type = "win";
+                                    actual_collision_entity = Collision_entity;
+                                }
                                 min_distance = distance;
                             }
                         }
@@ -282,6 +302,11 @@ namespace our
                         min_distance = INT_MAX - 1;
                         act_Collision_Type = "";
                     }
+
+                    if (act_Collision_Type == "win")
+                    {
+                        app->changeState("win");
+                    }
                 }
             }
 
@@ -301,6 +326,11 @@ namespace our
                         actual_collision_entity = nullptr;
                         min_distance = INT_MAX - 1;
                         act_Collision_Type = "";
+                    }
+
+                    if (act_Collision_Type == "win")
+                    {
+                        app->changeState("win");
                     }
                 }
             }
@@ -322,6 +352,11 @@ namespace our
                         min_distance = INT_MAX - 1;
                         act_Collision_Type = "";
                     }
+
+                    if (act_Collision_Type == "win")
+                    {
+                        app->changeState("win");
+                    }
                 }
             }
 
@@ -342,12 +377,12 @@ namespace our
                         min_distance = INT_MAX - 1;
                         act_Collision_Type = "";
                     }
-                }
-            }
 
-            if (collision->getobstucaseType() == CollisionType::WIN)
-            {
-                app->winner = true;
+                    if (act_Collision_Type == "win")
+                    {
+                        app->changeState("win");
+                    }
+                }
             }
 
             // If the left mouse button is pressed, we get the change in the mouse location

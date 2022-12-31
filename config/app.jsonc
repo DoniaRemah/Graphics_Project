@@ -123,9 +123,16 @@
                         },
                         "depthTesting":{
                             "enabled": true
-                        }
+                        },
+                        "blending":{
+                            "enabled": true,
+                            "sourceFactor": "GL_SRC_ALPHA",
+                            "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+                        },
+                        "depthMask": false
                     },
-                    "tint":[0, 0 ,1,0.5]
+                    "transparent":true,
+                    "tint":[1, 0 , 0, 0]
                 }
             }
         },
