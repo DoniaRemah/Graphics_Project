@@ -1,5 +1,7 @@
 #pragma once
 
+#include <GLFW/glfw3.h>
+
 #include <application.hpp>
 #include <shader/shader.hpp>
 #include <texture/texture2d.hpp>
@@ -9,6 +11,8 @@
 
 #include <functional>
 #include <array>
+
+#include <time.h>
 
 // This struct is used to store the location and size of a button and the code it should execute when clicked
 struct Button {
@@ -101,7 +105,7 @@ class Menustate: public our::State {
         // - The body {} which contains the code to be executed. 
         buttons[0].position = {685.0f, 365.0f};
         buttons[0].size = {501.0f, 45.0f};
-        buttons[0].action = [this](){this->getApp()->changeState("play");};
+        buttons[0].action = [this](){this->getApp()->changeState("play"); getApp()->start_time = glfwGetTime();};
 
         buttons[1].position = {725.0f, 435.0f};
         buttons[1].size = {421.0f, 45.0f};
@@ -114,6 +118,7 @@ class Menustate: public our::State {
 
         if(keyboard.justPressed(GLFW_KEY_SPACE)){
             // If the space key is pressed in this frame, go to the play state
+            getApp()->start_time = glfwGetTime();
             getApp()->changeState("play");
         } else if(keyboard.justPressed(GLFW_KEY_ESCAPE)) {
             // If the escape key is pressed in this frame, exit the game

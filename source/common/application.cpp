@@ -204,6 +204,14 @@ int our::Application::run(int run_for_frames) {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
+    ImFont *font2 = io.Fonts->AddFontFromFileTTF("assets\\fonts\\Brand New Retro Italic.ttf", 30.0f);
+    ImFont *font8 = io.Fonts->AddFontFromFileTTF("assets\\fonts\\Brand New Retro Italic.ttf", 60.0f);
+    ImFont *font1 = io.Fonts->AddFontFromFileTTF("assets\\fonts\\Erotica.ttf", 60.0f);
+    ImFont *font3 = io.Fonts->AddFontFromFileTTF("assets\\fonts\\game_over.ttf", 180.0f);
+    ImFont *font4 = io.Fonts->AddFontFromFileTTF("assets\\fonts\\game_over.ttf", 100.0f);
+    ImFont *font5 = io.Fonts->AddFontFromFileTTF("assets\\fonts\\timer.ttf", 50.0f);
+    ImFont *font7 = io.Fonts->AddFontFromFileTTF("assets\\fonts\\timer.ttf", 40.0f);
+    ImFont *font6 = io.Fonts->AddFontFromFileTTF("assets\\fonts\\Brand New Retro Italic.ttf", 60.0f);
     ImGui::StyleColorsDark();
 
     // Initialize ImGui for GLFW and OpenGL
@@ -241,6 +249,7 @@ int our::Application::run(int run_for_frames) {
 
     //Game loop
     while(!glfwWindowShouldClose(window)){
+        
         if(run_for_frames != 0 && current_frame >= run_for_frames) break;
         glfwPollEvents(); // Read all the user events and call relevant callbacks.
 
@@ -248,6 +257,84 @@ int our::Application::run(int run_for_frames) {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+
+        if (currentState == states["play"])
+        {
+            end_time = glfwGetTime();
+
+            ImGui::SetNextWindowSize(ImVec2(1280, 200));
+            ImGui::Begin(" ", nullptr, ImGuiWindowFlags_NoMove);
+            ImGui::SetWindowPos(" ", ImVec2(0, 0));
+
+            ImGuiStyle *style = &ImGui::GetStyle();
+
+            ImVec4 *colors = style->Colors;
+            colors[ImGuiCol_WindowBg] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_Border] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_ResizeGrip] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_ResizeGripActive] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_TitleBg] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_TitleBgActive] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+
+            ImGui::PushFont(font5);
+            ImGui::SetCursorPosX(40);
+
+            std::string t1 = "00:";
+            int time = 60 - abs(start_time - end_time);
+            std::string t2 = std::to_string(int(time));
+            std::string countdown;
+
+            if (10 - time > 0)
+                countdown = t1 + "0" + t2;
+            else
+                countdown = t1 + t2;
+            ImGui::Text(countdown.c_str());
+            ImGui::PopFont();
+
+            ImGui::SetCursorPosX(40);
+            ImGui::SetCursorPosY(120);
+
+            ImGui::PushFont(font7);
+            std::string l1 = "Score: ";
+            std::string l2 = std::to_string(score);
+            std::string totalLine = l1 + l2;
+            ImGui::Text(totalLine.c_str());
+            ImGui::PopFont();
+
+            ImGui::End();
+        }
+        else if(currentState == states["win"])
+        {
+            ImGui::SetNextWindowSize(ImVec2(1280, 720));
+            ImGui::Begin(" ", nullptr, ImGuiWindowFlags_NoMove);
+            ImGui::SetWindowPos(" ", ImVec2(0, 0));
+
+            ImGuiStyle *style = &ImGui::GetStyle();
+
+            ImVec4 *colors = style->Colors;
+            colors[ImGuiCol_WindowBg] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_Border] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_ResizeGrip] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_ResizeGripActive] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_TitleBg] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_TitleBgActive] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+            colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
+
+            ImGui::SetCursorPosX(280);
+            ImGui::SetCursorPosY(530);
+
+            ImGui::PushFont(font8);
+            std::string l1 = "Score: ";
+            std::string l2 = std::to_string(win_score);
+            std::string totalLine = l1 + l2;
+            ImGui::Text(totalLine.c_str());
+            ImGui::PopFont();
+
+            ImGui::End();
+        }
 
         if(currentState) currentState->onImmediateGui(); // Call to run any required Immediate GUI.
 

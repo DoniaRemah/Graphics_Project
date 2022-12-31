@@ -13,6 +13,8 @@
 #include "input/keyboard.hpp"
 #include "input/mouse.hpp"
 
+#include <time.h>
+
 namespace our
 {
 
@@ -74,8 +76,10 @@ namespace our
         virtual void setupCallbacks();                        // Sets-up the window callback functions from GLFW to our (Mouse/Keyboard) classes.
 
     public:
-        int score=0;
-        bool winner=false;
+        int score = 0;
+        bool winner = false;
+        double start_time, end_time;
+        int win_score;
 
         // Create an application with following configuration
         Application(const nlohmann::json &app_config) : app_config(app_config) {}

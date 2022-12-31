@@ -47,7 +47,7 @@ class Playstate : public our::State
         time += deltaTime;
 
         // Exceeded time limit
-        if (time >= 5)
+        if (time >= 60)
         {
             getApp()->changeState("game_over");
             getApp()->winner = false;
@@ -61,8 +61,9 @@ class Playstate : public our::State
         {
             getApp()->changeState("win");
             getApp()->winner = false;
+            getApp()->win_score = getApp()->score;
             getApp()->score = 0;
-            time =0;
+            time = 0;
             return;
         }
         // player won but didn't collect enough coins

@@ -78,7 +78,7 @@ class Losestate: public our::State {
         // - The body {} which contains the code to be executed. 
         buttons[0].position = {360.0f, 525.0f};
         buttons[0].size = {560.0f, 47.0f};
-        buttons[0].action = [this](){this->getApp()->changeState("play");};
+        buttons[0].action = [this](){this->getApp()->changeState("play"); getApp()->start_time = glfwGetTime();};
 
         buttons[1].position = {450.0f, 598.0f};
         buttons[1].size = {382.0f, 47.0f};
@@ -91,6 +91,7 @@ class Losestate: public our::State {
 
         if(keyboard.justPressed(GLFW_KEY_SPACE)){
             // If the space key is pressed in this frame, go to the play state
+            getApp()->start_time = glfwGetTime();
             getApp()->changeState("play");
         } else if(keyboard.justPressed(GLFW_KEY_ESCAPE)) {
             // If the escape key is pressed in this frame, exit the game
