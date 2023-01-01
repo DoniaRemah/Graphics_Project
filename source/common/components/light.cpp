@@ -29,7 +29,7 @@ namespace our
         // reading the specular vector
         specular = glm::vec3(data.value("specular", glm::vec3(1, 1, 1)));
 
-        color = glm::vec3(data.value("color", glm::vec3(1, 1, 1)));
+        color = glm::vec3(data.value("color", glm::vec3(0, 0, 0)));
 
         // if it is a point or a spot light
         // then there is an attenuation vector we have to read as well

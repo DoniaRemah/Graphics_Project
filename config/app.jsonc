@@ -36,13 +36,15 @@
                 "white":"assets/textures/white.png",
                 "black":"assets/textures/black.jpg",
                 "rough":"assets/textures/roughness.jpg",
+                "emissive_rough":"assets/textures/roughness2.jpg",
                 "galaxy":"assets/textures/sky.png",
                 "albedo_tex":"assets/textures/albedo-monkey1.jpg",
                 "gold":"assets/textures/gold.png",
                 "red":"assets/textures/red.png",
                 "albedo_ball":"assets/textures/albedo.jpg",
                 "specular_ball":"assets/textures/specular.jpg",
-                "roughness_ball":"assets/textures/roughness.jpg"
+                "roughness_ball":"assets/textures/roughness.jpg",
+                "emissive_tex":"assets/textures/emissive.jpg"
 
             },
             "meshes":{
@@ -105,9 +107,9 @@
                     // "roughness":"black",
                     "albedo":"ball_tex",
                     "specular":"white",
-                    "ambient_occlusion":"white",
+                    "ambient_occlusion":"black",
                     "roughness":"roughness_ball",
-                    // "emissive":"black_specular",
+                    "emissive":"black",
                     "sampler": "pixelated",
                     "tint": [1, 1, 1, 1]
                 },
@@ -156,10 +158,31 @@
                     // "ambient_occlusion":"ambient_occlusion",
                     "ambient_occlusion":"white",
                     "roughness":"rough",
-                    // "emissive":"black_specular",
+                    "emissive":"black",
                     "sampler": "pixelated",
-                        "tint": [1, 1, 1, 1]
+                    "tint": [1, 1, 1, 1]
                 },
+                "lightedcoin_emissive":{
+                    "type": "lighted",
+                    "shader": "lighted",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "transparent": false,
+                    "albedo":"emissive_rough",
+                    "specular":"black",
+                    // "ambient_occlusion":"ambient_occlusion",
+                    "ambient_occlusion":"black",
+                    "roughness":"emissive_rough",
+                    "emissive":"emissive_tex",
+                    "sampler": "pixelated",
+                    "tint": [1, 1, 1, 1]
+                },             
                 "lightedcoin_nospec":{
                     "type": "lighted",
                     "shader": "lighted",
@@ -177,7 +200,7 @@
                     // "ambient_occlusion":"ambient_occlusion",
                     "ambient_occlusion":"white",
                     "roughness":"rough",
-                    // "emissive":"black_specular",
+                    "emissive":"black",
                     "sampler": "pixelated",
                     "tint": [1, 1, 1, 1]
                 },
@@ -261,14 +284,14 @@
                         {
                         "type": "light",
                         "typeOfLight": "DIRECTIONAL",
-                        "diffuse": [50, 80, 90],
+                        "diffuse": [10, 20, 30],
                     "specular": [50, 50, 50]
                     }
                 ]
             },
             {
                 "name":"lightsource2",
-                "position": [10, 10, 10],
+                "position": [10, 10, 0],
                 "rotation": [0, 0, 0],
                 "scale": [1, 1, 1],
                 "components": [
@@ -283,25 +306,25 @@
                     {
                         "type": "light",
                         "typeOfLight": "POINT",
-                        "diffuse": [50, 80, 90],
+                        "diffuse": [10, 20, 30],
                         "specular": [50, 50, 50],
                         // "attenuation": [0.001, 0.001, 0.0001],
-                        "color": [1, 0, 0]
+                        "color": [0, 0, 0]
     
                     }
                 ]
             },
             {
                 "name":"lightsource3",
-                "position": [-10, 10, -10],
+                "position": [-10, 10, 0],
                 "rotation": [0, 0, 0],
                 "scale": [1, 1, 1],
                 "components": [
                     {
                         "type": "light",
                         "typeOfLight": "SPOT",
-                        "diffuse": [50, 80, 90],
-                    "specular": [50, 50, 50]
+                        "diffuse": [10, 20, 30],
+                        "specular": [50, 50, 50]
                     }
                 ]
             },
