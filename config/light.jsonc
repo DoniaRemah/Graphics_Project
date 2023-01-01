@@ -51,7 +51,8 @@
                 "cube": "assets/models/cube.obj",
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj",
-                "smooth_sphere":"assets/models/smooth-sphere.obj"
+                "smooth_sphere":"assets/models/smooth-sphere.obj",
+                "monkey" : "assets/models/monkey.obj"
             },
             "samplers":{
                 "default":{},
@@ -74,6 +75,27 @@
                     "tint": [1, 1, 1, 1],
                     "texture": "ground",
                     "sampler": "default"
+                },
+                "lightedground":{
+                    "type": "lighted",
+                    "shader": "lighted",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+
+                    },
+                    "transparent": false,
+                    "albedo":"ground",
+                    "specular":"black",
+                    "ambient_occlusion":"white",
+                    "roughness":"roughness_ball",
+                    "emissive":"black",
+                    "sampler": "pixelated",
+                    "tint": [1, 1, 1, 1]
                 },
                 "ball":{
                     "type": "tinted",
@@ -106,42 +128,14 @@
                     // "ambient_occlusion":"white",
                     // "roughness":"black",
                     "albedo":"albedo_ball",
-                    "specular":"specular_ball",
-                    "ambient_occlusion":"albedo_ball",
-                    "roughness":"rough",
+                    "specular":"red",
+                    "ambient_occlusion":"white",
+                    "roughness":"roughness_ball",
                     "emissive":"black",
                     "sampler": "pixelated",
                     "tint": [1, 1, 1, 1]
                 },
-                "wall":{
-                    "type": "textured",
-                    "shader": "textured",
-                    "pipelineState": {
-                        "faceCulling":{
-                            "enabled": false
-                        },
-                        "depthTesting":{
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "texture": "wall",
-                    "sampler": "default"
-                },
-                "coin":{
-                    "type": "tinted",
-                    "shader": "tinted",
-                    "pipelineState": {
-                        "faceCulling":{
-                            "enabled": false
-                        },
-                        "depthTesting":{
-                            "enabled": true
-                        }
-                    },
-                    "tint":[1,0.84,0, 1]
-                },
-                "lightedcoin":{
+                "lightedball_unlit":{
                     "type": "lighted",
                     "shader": "lighted",
                     "pipelineState": {
@@ -151,18 +145,22 @@
                         "depthTesting":{
                             "enabled": true
                         }
+
                     },
                     "transparent": false,
-                    "albedo":"gold",
-                    "specular":"white",
-                    // "ambient_occlusion":"ambient_occlusion",
+                    // "albedo":"ball_tex",
+                    // "specular":"white",
+                    // "ambient_occlusion":"white",
+                    // "roughness":"black",
+                    "albedo":"albedo_ball",
+                    "specular":"black",
                     "ambient_occlusion":"white",
                     "roughness":"rough",
                     "emissive":"black",
                     "sampler": "pixelated",
                     "tint": [1, 1, 1, 1]
                 },
-                "lightedcoin_emissive":{
+                "lightedball_emmisive":{
                     "type": "lighted",
                     "shader": "lighted",
                     "pipelineState": {
@@ -172,18 +170,23 @@
                         "depthTesting":{
                             "enabled": true
                         }
+
                     },
                     "transparent": false,
+                    // "albedo":"ball_tex",
+                    // "specular":"white",
+                    // "ambient_occlusion":"white",
+                    // "roughness":"black",
                     "albedo":"emissive_rough",
                     "specular":"black",
-                    // "ambient_occlusion":"ambient_occlusion",
-                    "ambient_occlusion":"black",
+                    "ambient_occlusion":"white",
                     "roughness":"emissive_rough",
                     "emissive":"emissive_tex",
                     "sampler": "pixelated",
                     "tint": [1, 1, 1, 1]
-                },             
-                "lightedcoin_nospec":{
+                },
+
+                "lightedmonkey":{
                     "type": "lighted",
                     "shader": "lighted",
                     "pipelineState": {
@@ -193,57 +196,20 @@
                         "depthTesting":{
                             "enabled": true
                         }
+
                     },
                     "transparent": false,
-                    "albedo":"gold",
-                    "specular":"black",
-                    // "ambient_occlusion":"ambient_occlusion",
+                    // "albedo":"ball_tex",
+                    // "specular":"white",
+                    // "ambient_occlusion":"white",
+                    // "roughness":"black",
+                    "albedo":"albedo_ball",
+                    "specular":"ball_tex",
                     "ambient_occlusion":"white",
-                    "roughness":"rough",
+                    "roughness":"roughness_ball",
                     "emissive":"black",
                     "sampler": "pixelated",
                     "tint": [1, 1, 1, 1]
-                },
-                "transparentcoin":{
-                    "type": "tinted",
-                    "shader": "tinted",
-                    "pipelineState": {
-                        "faceCulling":{
-                            "enabled": false
-                        },
-                        "depthTesting":{
-                            "enabled": true
-                        },
-                        "blending":{
-                            "enabled": true,
-                            "sourceFactor": "GL_SRC_ALPHA",
-                            "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
-                        },
-                        "depthMask": false
-                    },
-                    "transparent":true,
-                    
-                    "tint":[0.84,0.84,0, 0.3]
-                },
-                "win":{
-                    "type": "tinted",
-                    "shader": "tinted",
-                    "pipelineState": {
-                        "faceCulling":{
-                            "enabled": false
-                        },
-                        "depthTesting":{
-                            "enabled": true
-                        },
-                        "blending":{
-                            "enabled": true,
-                            "sourceFactor": "GL_SRC_ALPHA",
-                            "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
-                        },
-                        "depthMask": false
-                    },
-                    "transparent":true,
-                    "tint":[1, 0 , 0, 0]
                 },
                 
                 "white":{
@@ -271,60 +237,60 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "plane",
-                        "material": "ground"
+                        "material": "lightedground"
                     }
                 ]
-            },
-            {
-                "name":"lightsource",
+            },                                                     //*SPOT LIGHT ENTITY*:
+            {  
                 "position": [0, 10, 0],
                 "rotation": [0, 0, 0],
-                "scale": [1, 1, 1],
+                "scale": [1,1,1],
                 "components": [
-                        {
-                        "type": "light",
-                        "typeOfLight": "DIRECTIONAL",
-                        "diffuse": [10, 20, 30],
-                    "specular": [50, 50, 50]
-                    }
-                ]
-            },
-            {
-                "name":"lightsource2",
-                "position": [10, 10, 0],
-                "rotation": [0, 0, 0],
-                "scale": [1, 1, 1],
-                "components": [
-                    // {
-                    //         "type": "light",
-                    //         "typeOfLight": "POINT",
-                    //         "diffuse": [0, 0, 1],
-                    //         "specular": [1, 1, 1],
-                    //         "attenuation": [0.001, 0.001, 0.0001],
-                    //         "color": [0.2, 0.3, 0.7, 1]
-                    //     }
+                
                     {
                         "type": "light",
-                        "typeOfLight": "POINT",
-                        "diffuse": [10, 20, 30],
+                        "typeOfLight": "SPOT",
+                        "diffuse": [50, 80, 90],
                         "specular": [50, 50, 50],
-                        "attenuation": [0.001, 0.001, 0.0001],
-                        "color": [0, 0, 0]
+                        "attenuation":[1,0.1,0.2],
+                        "cone_angles":[40,50]
+                        // "color":[0,0,1]
     
                     }
                 ]
             },
-            {
-                "name":"lightsource3",
-                "position": [-10, 10, 0],
+                                                     //*DIRECTIONAL ENTITY *: 
+            { 
+                "position": [10 , 10 , 10],
                 "rotation": [0, 0, 0],
-                "scale": [1, 1, 1],
+                "direction":[0,0,1],
+                "scale": [1,1,1],
                 "components": [
                     {
                         "type": "light",
-                        "typeOfLight": "SPOT",
-                        "diffuse": [10, 20, 30],
-                        "specular": [50, 50, 50]
+                        "typeOfLight": "DIRECTIONAL",
+                        "diffuse": [1, 1, 1],
+                        "specular": [1, 1, 1]
+    
+                    }
+                ]
+            },
+                                                         //*POINT LIGHT ENTITY*: 
+            { 
+                "position": [-10 ,10 ,-10],
+                "rotation": [0, 0, 0],
+                "direction":[1,1,1],
+                "scale": [1,1,1],
+                "components": [
+                
+                    {
+                        "type": "light",
+                        "typeOfLight": "POINT",
+                        "diffuse": [80, 80, 90],
+                        // "attenuation":[1,1,1],
+                        "specular": [1, 1, 1]
+                        // "color":[0,0,1]
+    
                     }
                 ]
             },
@@ -381,6 +347,96 @@
                         "type": "Mesh Renderer",
                         "mesh": "sphere",
                         "material": "lightedball"
+                    }
+                    
+                                        
+                    // {
+                    //     "type": "light",
+                    //     "typeOfLight": "DIRECTIONAL",
+                    //     "diffuse": [1, 0, 0],
+                    //     "specular": [1, 1, 1]
+                    // }
+                ]
+
+            }
+            ,
+            {
+                "name":"ball2",
+                "position": [5, 1.25, 0],
+                "rotation": [0, 0, 0],
+                "scale": [1.25, 1.25, 1.25],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "sphere",
+                        "material": "lightedball_unlit"
+                    }
+                    
+                                        
+                    // {
+                    //     "type": "light",
+                    //     "typeOfLight": "DIRECTIONAL",
+                    //     "diffuse": [1, 0, 0],
+                    //     "specular": [1, 1, 1]
+                    // }
+                ]
+
+            }
+            ,
+            {
+                "name":"ball3",
+                "position": [-5, 1.25, 0],
+                "rotation": [0, 0, 0],
+                "scale": [1.25, 1.25, 1.25],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "sphere",
+                        "material": "lightedball_emmisive"
+                    }
+                    
+                                        
+                    // {
+                    //     "type": "light",
+                    //     "typeOfLight": "DIRECTIONAL",
+                    //     "diffuse": [1, 0, 0],
+                    //     "specular": [1, 1, 1]
+                    // }
+                ]
+
+            },
+            {
+                "name":"monkey",
+                "position": [0, 1.25, 3],
+                "rotation": [0, 0, 0],
+                "scale": [1.25, 1.25, 1.25],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "monkey",
+                        "material": "lightedmonkey"
+                    }
+                    
+                                        
+                    // {
+                    //     "type": "light",
+                    //     "typeOfLight": "DIRECTIONAL",
+                    //     "diffuse": [1, 0, 0],
+                    //     "specular": [1, 1, 1]
+                    // }
+                ]
+
+            },
+            {
+                "name":"monkey2",
+                "position": [5, 1.25, 3],
+                "rotation": [0, 0, 0],
+                "scale": [1.25, 1.25, 1.25],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "monkey",
+                        "material": "lightedball_unlit"
                     }
                     
                                         
