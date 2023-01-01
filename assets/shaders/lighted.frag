@@ -57,14 +57,15 @@ void main(){
     float material_roughness = texture(material.roughness, fs_in.tex_coord).r;
     float material_shininess = 2.0 / pow(clamp(material_roughness, 0.001, 0.999), 4.0) - 2.0;
 
+    // Set to 0 in entities without emissive properties.
     vec3 material_emissive = texture(material.emissive, fs_in.tex_coord).rgb;
 
     vec3 sky_light = (normal.y > 0) ?
         mix(sky.middle, sky.top, normal.y * normal.y) :
         mix(sky.middle, sky.bottom, normal.y * normal.y);
 
-    // frag_color = vec4(material_emissive + material_ambient  , 1.0);
-    frag_color = vec4(0.0,0.0,0.0,1.0);
+    
+    frag_color = vec4(material_emissive  , 1.0);
 
     int clamped_light_count = min(MAX_LIGHTS, light_count);
     for(int i = 0; i < clamped_light_count; i++){
