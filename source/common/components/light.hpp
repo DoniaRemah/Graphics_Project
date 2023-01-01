@@ -39,12 +39,6 @@ namespace our
         glm::vec4 color;
         glm::vec3 attenuation; 
         glm::vec2 cone_angles; 
-
-        //since the type of light will be specified in the json file as a string
-        //DIRECTIONAL
-        //POINT
-        //SPOT
-        std::string lightTypeStr;
         
         //overriding the deserializer function 
         //to read the light data from the json file

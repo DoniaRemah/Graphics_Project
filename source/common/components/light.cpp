@@ -2,7 +2,6 @@
 #include "../deserialize-utils.hpp"
 #include "./component-deserializer.hpp"
 #include <glm/gtx/euler_angles.hpp>
-#include <iostream>
 
 namespace our
 {
@@ -11,11 +10,9 @@ namespace our
     {
         if (!data.is_object()) // if it is not an object asln
             return;
-
+        std::string lightTypeStr;
         // setting a default value to everything we read
         lightTypeStr = data.value("typeOfLight", "DIRECTIONAL");
-        std::cout << "in the light deserializer" << std::endl;
-        std::cout << "LIGHT type is:" << lightTypeStr << std::endl;
 
         // setting the light type integer based on what we read from the json file
         if (lightTypeStr == "DIRECTIONAL")
