@@ -39,7 +39,10 @@
                 "galaxy":"assets/textures/sky.png",
                 "albedo_tex":"assets/textures/albedo-monkey1.jpg",
                 "gold":"assets/textures/gold.png",
-                "red":"assets/textures/red.png"
+                "red":"assets/textures/red.png",
+                "albedo_ball":"assets/textures/albedo.jpg",
+                "specular_ball":"assets/textures/specular.jpg",
+                "roughness_ball":"assets/textures/roughness.jpg"
 
             },
             "meshes":{
@@ -93,13 +96,17 @@
                         "depthTesting":{
                             "enabled": true
                         }
+
                     },
                     "transparent": false,
+                    // "albedo":"ball_tex",
+                    // "specular":"white",
+                    // "ambient_occlusion":"white",
+                    // "roughness":"black",
                     "albedo":"ball_tex",
                     "specular":"white",
-                    // "ambient_occlusion":"ambient_occlusion",
                     "ambient_occlusion":"white",
-                    "roughness":"rough",
+                    "roughness":"roughness_ball",
                     // "emissive":"black_specular",
                     "sampler": "pixelated",
                     "tint": [1, 1, 1, 1]
@@ -245,56 +252,65 @@
                     }
                 ]
             },
-            // {
-            //     "name":"lightsource",
-            //     "position": [0, 10, 0],
-            //     "rotation": [0, 0, 0],
-            //     "scale": [1, 1, 1],
-            //     "components": [
-            //         {
-            //             "type": "Mesh Renderer",
-            //             "mesh": "smooth_sphere",
-            //             "material": "white"
-            //         },
-                    
-            //             {
-            //             "type": "light",
-            //             "typeOfLight": "DIRECTIONAL",
-            //             "diffuse": [50, 80, 90],
-            //         "specular": [50, 50, 50]
-            //         }
-            //     ]
-            // },
+            {
+                "name":"lightsource",
+                "position": [0, 10, 0],
+                "rotation": [0, 0, 0],
+                "scale": [1, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "smooth_sphere",
+                        "material": "white"
+                    }
+                    ,
+                        {
+                        "type": "light",
+                        "typeOfLight": "DIRECTIONAL",
+                        "diffuse": [50, 80, 90],
+                    "specular": [50, 50, 50]
+                    }
+                ]
+            },
             {
                 "name":"lightsource2",
                 "position": [10, 10, 10],
                 "rotation": [0, 0, 0],
                 "scale": [1, 1, 1],
                 "components": [
+                    // {
+                    //         "type": "light",
+                    //         "typeOfLight": "POINT",
+                    //         "diffuse": [0, 0, 1],
+                    //         "specular": [1, 1, 1],
+                    //         "attenuation": [0.001, 0.001, 0.0001],
+                    //         "color": [0.2, 0.3, 0.7, 1]
+                    //     }
                     {
-                            "type": "light",
-                            "typeOfLight": "POINT",
-                            "diffuse": [50, 80, 90],
-                    "specular": [50, 50, 50],
-                            "attenuation": [0.001, 0.001, 0.0001],
-                            "color": [0.2, 0.3, 0.7, 1]
-                        }
+                        "type": "light",
+                        "typeOfLight": "POINT",
+                        "diffuse": [50, 80, 90],
+                        "specular": [50, 50, 50]
+                        // "attenuation": [0.001, 0.001, 0.0001],
+                        // "color": [0.2, 0.3, 0.7, 1]
+    
+                    }
                 ]
             },
-            // {
-            //     "name":"lightsource3",
-            //     "position": [-10, 10, -10],
-            //     "rotation": [0, 0, 0],
-            //     "scale": [1, 1, 1],
-            //     "components": [
-            //         {
-            //             "type": "light",
-            //             "typeOfLight": "SPOT",
-            //             "diffuse": [50, 80, 90],
-            //         "specular": [50, 50, 50]
-            //         }
-            //     ]
-            // },
+            {
+                "name":"lightsource3",
+                "position": [-10, 10, -10],
+                "rotation": [0, 0, 0],
+                "scale": [1, 1, 1],
+                "components": [
+                    {
+                        "type": "light",
+                        "typeOfLight": "SPOT",
+                        "diffuse": [50, 80, 90],
+                    "specular": [50, 50, 50]
+                    }
+                ]
+            },
             {
                 "name":"player",
                 "position": [8.8, 0.8, 4.2],
@@ -306,7 +322,7 @@
                     },
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "smooth_sphere",
+                        "mesh": "sphere",
                         "material": "lightedball"
                     },
                     {
