@@ -236,13 +236,12 @@ namespace our
         //  Don't forget to set the "transform" uniform
         //  to be equal the model-view-projection matrix for each render command
 
-        glm::mat4 MVP_O;
         glm::vec3 the_eye = eye;
 
         for (auto command : opaqueCommands)
         {
             command.material->setup();
-            MVP_O = VP * command.localToWorld;
+            // MVP_O = VP * command.localToWorld;
             // if the material of the object is lighted
             if (auto light_material = dynamic_cast<LitMaterial *>(command.material); light_material)
             {
@@ -274,7 +273,7 @@ namespace our
             }
             else
             {
-                command.material->shader->set("transform", MVP_O);
+                command.material->shader->set("transform", VP * command.localToWorld);
             }
 
             command.mesh->draw();
@@ -342,7 +341,6 @@ namespace our
         if (lightMaterial)
         {
             lightMaterial->setup();
-            // lightMaterial->shader->set()
         }
     }
 
