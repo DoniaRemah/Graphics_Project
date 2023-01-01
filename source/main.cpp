@@ -9,15 +9,7 @@
 #include "states/win-state.hpp"
 #include "states/lose-state.hpp"
 #include "states/play-state.hpp"
-#include "states/shader-test-state.hpp"
-#include "states/mesh-test-state.hpp"
-#include "states/transform-test-state.hpp"
-#include "states/pipeline-test-state.hpp"
-#include "states/texture-test-state.hpp"
-#include "states/sampler-test-state.hpp"
-#include "states/material-test-state.hpp"
-#include "states/entity-test-state.hpp"
-#include "states/renderer-test-state.hpp"
+
 
 int main(int argc, char** argv) {
     
