@@ -167,61 +167,59 @@ namespace our
     //     sampler_emissive = AssetLoader<Sampler>::get(data.value("sampleremissive", ""));
     // }
 
-
- void LitMaterial::setup() const 
+    void LitMaterial::setup() const
     {
-        //calling on the textured material setup function
-        //since lit material inherits from textured material
-        TexturedMaterial::setup(); 
-        //going through the texture maps defined in the .hpp
-        //binding the texture and sampler
-        //and then setting the values in the shader file
+        // calling on the textured material setup function
+        // since lit material inherits from textured material
+        Material::setup();
+        // going through the texture maps defined in the .hpp
+        // binding the texture and sampler
+        // and then setting the values in the shader file
         if (albedo)
         {
-            glActiveTexture(GL_TEXTURE0);  
+            glActiveTexture(GL_TEXTURE0);
             albedo->bind();
             sampler->bind(0);
-            shader->set("material.albedo",0);
+            shader->set("material.albedo", 0);
         }
         if (specular)
         {
-            glActiveTexture(GL_TEXTURE1);  
+            glActiveTexture(GL_TEXTURE1);
             specular->bind();
             sampler->bind(1);
-            shader->set("material.specular",1);
+            shader->set("material.specular", 1);
         }
-        if (ambient_occlusion )
+        if (ambient_occlusion)
         {
-            glActiveTexture(GL_TEXTURE2);  
+            glActiveTexture(GL_TEXTURE2);
             ambient_occlusion->bind();
             sampler->bind(2);
-            shader->set("material.ambient_occlusion",2);
+            shader->set("material.ambient_occlusion", 2);
         }
         if (roughness)
         {
-            glActiveTexture(GL_TEXTURE3);  
+            glActiveTexture(GL_TEXTURE3);
             roughness->bind();
             sampler->bind(3);
-            shader->set("material.roughness",3);
+            shader->set("material.roughness", 3);
         }
         if (emissive)
         {
-            glActiveTexture(GL_TEXTURE4);  
+            glActiveTexture(GL_TEXTURE4);
             emissive->bind();
             sampler->bind(4);
-            shader->set("material.emissive",4);
+            shader->set("material.emissive", 4);
         }
         glActiveTexture(GL_TEXTURE0);
-        
     }
 
-    //the deserializer function to read data from the json object
-    void LitMaterial::deserialize(const nlohmann::json& data)
+    // the deserializer function to read data from the json object
+    void LitMaterial::deserialize(const nlohmann::json &data)
     {
-        //calling on the textured material function
-        TexturedMaterial::deserialize(data); 
+        // calling on the textured material function
+        Material::deserialize(data);
 
-        if(!data.is_object())
+        if (!data.is_object())
         {
             return;
         }
@@ -230,7 +228,7 @@ namespace our
         ambient_occlusion = AssetLoader<Texture2D>::get(data.value("ambient_occlusion", ""));
         roughness = AssetLoader<Texture2D>::get(data.value("roughness", ""));
         emissive = AssetLoader<Texture2D>::get(data.value("emissive", ""));
-            
+
         // if(data.contains("albedo"))
         // {
         //    albedo = AssetLoader<Texture2D>::get(data.value("albedo", ""));
@@ -252,8 +250,7 @@ namespace our
         //    emissive = AssetLoader<Texture2D>::get(data.value("emissive", ""));
         // }
 
-        //at last get the sampler
+        // at last get the sampler
         sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
-
     }
 }
