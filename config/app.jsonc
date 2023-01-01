@@ -2,7 +2,7 @@
     "start-scene": "menu",
     "window":
     {
-        "title":"Default Game Window",
+        "title":"GET OUT MAZE !!",
         "size":{
             "width":1280,
             "height":720
@@ -37,7 +37,8 @@
                 "white":"assets/textures/white.png",
                 "rough":"assets/textures/roughness.jpg",
                 "galaxy":"assets/textures/sky.png",
-                "albedo_tex":"assets/textures/albedo-monkey1.jpg"
+                "albedo_tex":"assets/textures/albedo-monkey1.jpg",
+                "gold":"assets/textures/gold.png"
 
             },
             "meshes":{
@@ -109,6 +110,48 @@
                         }
                     },
                     "tint":[1,0.84,0, 1]
+                },
+                "lightedcoin":{
+                    "type": "lighted",
+                "shader": "lighted",
+                "pipelineState": {
+                    "faceCulling":{
+                        "enabled": false
+                    },
+                    "depthTesting":{
+                        "enabled": true
+                    }
+                },
+                "transparent": false,
+                "albedo":"gold",
+                "specular":"white",
+                // "ambient_occlusion":"ambient_occlusion",
+                "ambient_occlusion":"white",
+                "roughness":"rough",
+                // "emissive":"black_specular",
+                "sampler": "pixelated",
+                    "tint": [1, 1, 1, 1]
+                },
+                "transparentcoin":{
+                    "type": "tinted",
+                    "shader": "tinted",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        },
+                        "blending":{
+                            "enabled": true,
+                            "sourceFactor": "GL_SRC_ALPHA",
+                            "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+                        },
+                        "depthMask": false
+                    },
+                    "transparent":true,
+                    
+                    "tint":[0.84,0.84,0, 0.3]
                 },
                 "tex_coin":{
                     "type": "textured",
@@ -824,7 +867,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -845,7 +888,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -887,7 +930,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -908,7 +951,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -950,7 +993,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -971,7 +1014,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -1013,7 +1056,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -1034,7 +1077,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -1076,7 +1119,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -1097,7 +1140,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -1140,7 +1183,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -1161,7 +1204,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -1203,7 +1246,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -1224,7 +1267,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -1266,7 +1309,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -1287,7 +1330,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -1329,7 +1372,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -1350,7 +1393,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -1392,7 +1435,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
@@ -1413,7 +1456,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "transparentcoin"
                     },
                     {
                         "type": "collision",
@@ -1455,7 +1498,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "coin"
+                        "material": "lightedcoin"
                     },
                     {
                         "type": "collision",
