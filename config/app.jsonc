@@ -35,6 +35,7 @@
                 "coin":"assets/textures/yellowCoin.png",
                 "ball_tex":"assets/textures/ball.png",
                 "white":"assets/textures/white.png",
+                "black":"assets/textures/black.jpg",
                 "rough":"assets/textures/roughness.jpg",
                 "galaxy":"assets/textures/sky.png",
                 "albedo_tex":"assets/textures/albedo-monkey1.jpg",
@@ -125,6 +126,27 @@
                 "transparent": false,
                 "albedo":"gold",
                 "specular":"white",
+                // "ambient_occlusion":"ambient_occlusion",
+                "ambient_occlusion":"white",
+                "roughness":"rough",
+                // "emissive":"black_specular",
+                "sampler": "pixelated",
+                    "tint": [1, 1, 1, 1]
+                },
+                "lightedcoin_nospec":{
+                    "type": "lighted",
+                "shader": "lighted",
+                "pipelineState": {
+                    "faceCulling":{
+                        "enabled": false
+                    },
+                    "depthTesting":{
+                        "enabled": true
+                    }
+                },
+                "transparent": false,
+                "albedo":"gold",
+                "specular":"black",
                 // "ambient_occlusion":"ambient_occlusion",
                 "ambient_occlusion":"white",
                 "roughness":"rough",
@@ -888,7 +910,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "cube",
-                        "material": "transparentcoin"
+                        "material": "lightedcoin_nospec"
                     },
                     {
                         "type": "collision",
