@@ -56,10 +56,10 @@ namespace our
         // TODO: (Req 7) Write this function
         TintedMaterial ::setup();                      // setup for the tintedmaterial
         shader->set("alphaThreshold", alphaThreshold); // set alpha to uniform
+        glActiveTexture(GL_TEXTURE0);                  // active texture unit
         if (texture != nullptr)
         {
-            glActiveTexture(GL_TEXTURE0); // active texture unit
-            texture->bind();              // set open glBindTexture(GL_TEXTURE_2D, texture);
+            texture->bind(); // set open glBindTexture(GL_TEXTURE_2D, texture);
         }
         if (sampler != nullptr)
         {
@@ -179,35 +179,40 @@ namespace our
         {
             glActiveTexture(GL_TEXTURE0);
             albedo->bind();
-            sampler->bind(0);
+            if (sampler)
+                sampler->bind(0);
             shader->set("material.albedo", 0);
         }
         if (specular)
         {
             glActiveTexture(GL_TEXTURE1);
             specular->bind();
-            sampler->bind(1);
+            if (sampler)
+                sampler->bind(1);
             shader->set("material.specular", 1);
         }
         if (ambient_occlusion)
         {
             glActiveTexture(GL_TEXTURE2);
             ambient_occlusion->bind();
-            sampler->bind(2);
+            if (sampler)
+                sampler->bind(2);
             shader->set("material.ambient_occlusion", 2);
         }
         if (roughness)
         {
             glActiveTexture(GL_TEXTURE3);
             roughness->bind();
-            sampler->bind(3);
+            if (sampler)
+                sampler->bind(3);
             shader->set("material.roughness", 3);
         }
         if (emissive)
         {
             glActiveTexture(GL_TEXTURE4);
             emissive->bind();
-            sampler->bind(4);
+            if (sampler)
+                sampler->bind(4);
             shader->set("material.emissive", 4);
         }
         glActiveTexture(GL_TEXTURE0);
@@ -228,27 +233,6 @@ namespace our
         ambient_occlusion = AssetLoader<Texture2D>::get(data.value("ambient_occlusion", ""));
         roughness = AssetLoader<Texture2D>::get(data.value("roughness", ""));
         emissive = AssetLoader<Texture2D>::get(data.value("emissive", ""));
-
-        // if(data.contains("albedo"))
-        // {
-        //    albedo = AssetLoader<Texture2D>::get(data.value("albedo", ""));
-        // }
-        // if(data.contains("specular"))
-        // {
-        //    specular = AssetLoader<Texture2D>::get(data.value("specular", ""));
-        // }
-        // if(data.contains("ambient_occlusion"))
-        // {
-        //    ambient_occlusion = AssetLoader<Texture2D>::get(data.value("ambient_occlusion", ""));
-        // }
-        // if(data.contains("roughness"))
-        // {
-        //    roughness = AssetLoader<Texture2D>::get(data.value("roughness", ""));
-        // }
-        // if(data.contains("emissive"))
-        // {
-        //    emissive = AssetLoader<Texture2D>::get(data.value("emissive", ""));
-        // }
 
         // at last get the sampler
         sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
