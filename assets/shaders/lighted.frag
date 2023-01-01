@@ -8,6 +8,7 @@
 
 struct Light {
     int type;
+    vec3 color;
     vec3 position;
     vec3 direction;
     vec3 diffuse;
@@ -80,6 +81,8 @@ void main(){
         
         vec3 specular = light.specular * material_specular * pow(max(0, dot(view, reflected)), material_shininess);
 
+        vec3 total_ambiance = material_ambient *  light.color;
+
         float attenuation = 1;
         if(light.type != DIRECTIONAL){
             float d = distance(light.position, fs_in.world);
@@ -90,6 +93,6 @@ void main(){
             }
         }
 
-        frag_color.rgb += (diffuse + specular) * attenuation;
+        frag_color.rgb += ((diffuse + specular) * attenuation )+ total_ambiance ;
     }
 }

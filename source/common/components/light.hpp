@@ -36,7 +36,7 @@ namespace our
         int lightType; 
         glm::vec3 diffuse;
         glm::vec3 specular;
-        glm::vec4 color;
+        glm::vec3 color;
         glm::vec3 attenuation; 
         glm::vec2 cone_angles; 
         
