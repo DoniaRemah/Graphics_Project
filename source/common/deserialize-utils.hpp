@@ -14,17 +14,17 @@
 // We define it in the glm namespace since 
 // it is the easiest way to get nlohmann::json working with glm data types
 namespace glm {
-    template<length_t L, typename T, qualifier Q>
-    void from_json(const nlohmann::json& j, vec<L, T, Q>& v){
+template<length_t L, typename T, qualifier Q>
+void from_json(const nlohmann::json& j, vec<L, T, Q>& v){
         for(length_t index = 0; index < L; ++index)
-            v[index] = j[index].get<T>();
-    }
+                v[index] = j[index].get<T>();
+}
 }
 
 namespace our {
     // This namespace will hold a set of inline maps that map between strings and GLenums
     // These will be used to deserialize Sampler and PipelineState Configurations
-    namespace gl_enum_deserialize {
+namespace gl_enum_deserialize {
         typedef std::unordered_map<std::string, GLenum> const EnumMap;
 
         inline EnumMap primitives = {
@@ -111,6 +111,6 @@ namespace our {
                 {"GL_MIN", GL_MIN},
                 {"GL_MAX", GL_MAX}
         };
-    }
+}
 
 }

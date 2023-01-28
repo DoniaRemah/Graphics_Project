@@ -122,7 +122,7 @@ void GLAPIENTRY opengl_callback(GLenum source, GLenum type, GLuint id, GLenum se
     }
 
     std::cout << "OpenGL Debug Message " << id << " (type: " << _type << ") of " << _severity
-              << " raised from " << _source << ": " << message << std::endl;
+    << " raised from " << _source << ": " << message << std::endl;
 }
 
 void our::Application::configureOpenGL()
@@ -499,7 +499,7 @@ void our::Application::setupCallbacks()
 
     // Keyboard callbacks
     glfwSetKeyCallback(window, [](GLFWwindow *window, int key, int scancode, int action, int mods)
-                       {
+    {
         auto* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
         if(app){
             app->getKeyboard().keyEvent(key, scancode, action, mods);
@@ -508,7 +508,7 @@ void our::Application::setupCallbacks()
 
     // mouse position callbacks
     glfwSetCursorPosCallback(window, [](GLFWwindow *window, double x_position, double y_position)
-                             {
+    {
         auto* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
         if(app){
             app->getMouse().CursorMoveEvent(x_position, y_position);
@@ -517,7 +517,7 @@ void our::Application::setupCallbacks()
 
     // mouse position callbacks
     glfwSetCursorEnterCallback(window, [](GLFWwindow *window, int entered)
-                               {
+    {
         auto* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
         if(app){
             if(app->currentState) app->currentState->onCursorEnterEvent(entered);
@@ -525,7 +525,7 @@ void our::Application::setupCallbacks()
 
     // mouse button position callbacks
     glfwSetMouseButtonCallback(window, [](GLFWwindow *window, int button, int action, int mods)
-                               {
+    {
         auto* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
         if(app){
             app->getMouse().MouseButtonEvent(button, action, mods);
@@ -534,7 +534,7 @@ void our::Application::setupCallbacks()
 
     // mouse scroll callbacks
     glfwSetScrollCallback(window, [](GLFWwindow *window, double x_offset, double y_offset)
-                          {
+    {
         auto* app = static_cast<Application*>(glfwGetWindowUserPointer(window));
         if(app){
             app->getMouse().ScrollEvent(x_offset, y_offset);

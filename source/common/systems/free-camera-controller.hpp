@@ -385,6 +385,8 @@ namespace our
                 }
             }
 
+//////////////////////////// USE THIS FEATURE FOR TESTING ONLY
+
             // // If the left mouse button is pressed, we get the change in the mouse location
             // // and use it to update the camera rotation
             // if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1))
