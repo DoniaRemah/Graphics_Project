@@ -1,0 +1,20 @@
+To compile the code, you need CMake and a C++17 compiler. Thus, you CANNOT use an version of Visual
+Studio older than Visual Studio 2017. As alternatives, you can use GCC 9 (or newer) or CLang 5 (or newer).
+If you are using Visual Studio Code with the CMake Tools extension, you should find the
+GAME_APPLICATION.exe inside the folder bin. You should run the executable using a POWERSHELL terminal from the
+project folder where the execution command will be:
+
+///////////////////////////
+./bin/GAME_APPLICATION.exe
+///////////////////////////
+
+This will run the application using the default configuration file config/app.jsonc. To run another
+configuration (e.g. config/app.jsonc), you should execute the command:
+
+////////////////////////////////////////////////
+./bin/GAME_APPLICATION.exe -c='config/app.jsonc'
+////////////////////////////////////////////////
+
+
+
+
