@@ -1,0 +1,3 @@
+-Collect 10 coins before the timer runs out.
+-If you tried to get out before collecting 10 coins, you won't be able to.
+-You can play using the arrow keys or the WASD keys.
